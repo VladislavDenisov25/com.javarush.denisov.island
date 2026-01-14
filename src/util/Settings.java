@@ -13,8 +13,11 @@ import java.util.Map;
 
 public final class Settings {
 
-    static final int x = 1;
-    static final int y = 1;
+   static final int X = 1;
+  static final int Y = 1;
+
+    static final int minCreatCountPredator = 5;
+    static final int minCreatCountHerbivore = 10;
 
    public final static Map<Eatable, Map<Eatable, Integer>> animalAttack = new HashMap<>() {{
 
@@ -290,7 +293,7 @@ public final class Settings {
 
     }};
 
-   public static Map<Eatable, Integer> animalLiveCount = new HashMap<>();
+
 
    public final static Map<Eatable, Integer> animalMaxCount = new HashMap<>() {{
        put(new Wolf(), 30);
@@ -329,6 +332,23 @@ public final class Settings {
        put(new Caterpillar(), 0);
    }};
 
-
+    public final static Map<Eatable, Double> eatableWeigth = new HashMap<>(){{
+        put(new Wolf(), 50d);
+        put(new Boa(), 15d);
+        put(new Fox(), 8d);
+        put(new Bear(), 500d);
+        put(new Eagle(), 6d);
+        put(new Horse(), 400d);
+        put(new Deer(), 300d);
+        put(new Rabbit(), 2d);
+        put(new Mouse(), 0.05d);
+        put(new Goat(), 60d);
+        put(new Sheep(), 70d);
+        put(new Boar(), 400d);
+        put(new Buffalo(), 700d);
+        put(new Duck(), 1d);
+        put(new Caterpillar(), 0.01d);
+        put(new Plant(), 1d);
+    }};
 
 }

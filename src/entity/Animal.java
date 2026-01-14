@@ -4,7 +4,7 @@ import entity.island.Location;
 
 public abstract class Animal implements Eatable {
 
-     double weigth;
+    double weigth = 0.0d;
 
     void eat(Eatable e) {
 

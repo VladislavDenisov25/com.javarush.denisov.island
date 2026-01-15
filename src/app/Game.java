@@ -7,6 +7,7 @@ import entity.island.*;
 import entity.predator.*;
 import util.Settings;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
@@ -64,16 +65,23 @@ public class Game {
         }
     }
     public void infoCountAnimal() {
-        Map<String, Integer> countAnimal = new HashMap<>();
+        Map<Class, Integer> countAnimal = new HashMap<>();
 
         for (Location location : Island.getInstance().getLocation()) {
             for (Eatable eatable : location.animalLiveCount.keySet()) {
-                countAnimal.merge(eatable.getClass().getSimpleName(), 1, Integer::sum);
+                countAnimal.merge(eatable.getClass(), 1, Integer::sum);
             }
         }
 
-        for (String s : countAnimal.keySet()) {
-            System.out.printf("%s = %d ", s, countAnimal.get(s));
+        for (Class eatable : countAnimal.keySet()) {
+            try {
+                Class<?> aClass = Class.forName(eatable.getName());
+                Eatable eatable1 = (Eatable) aClass.getDeclaredConstructor().newInstance();
+                System.out.printf("%s = %d ",eatable1.getEmoji() , countAnimal.get(eatable));
+            } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
+                     | IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
         }
         System.out.println();
     }

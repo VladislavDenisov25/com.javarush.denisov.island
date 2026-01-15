@@ -1,5 +1,12 @@
 package entity.herbivore;
 
-public class Horse extends Herbivore{
+import constants.Constants;
 
+public class Horse extends Herbivore{
+    public  String emoji = Constants.emojiHorse;
+
+    @Override
+    public String getEmoji() {
+        return emoji;
+    }
 }

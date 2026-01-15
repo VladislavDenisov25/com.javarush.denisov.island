@@ -12,6 +12,10 @@ public abstract class Animal implements Eatable {
 
     public Location[] location = Island.getInstance().getLocation();
 
+  public double weight;
+
+   public String emoji;
+
     @Override
     public Eatable createEatable(Eatable eatable){
         return switch (eatable.getClass().getSimpleName()){
@@ -39,7 +43,7 @@ public abstract class Animal implements Eatable {
         int randomLocation= ThreadLocalRandom.current().nextInt(location.length);
         location[randomLocation].animalLiveCount.put(eatable, 1);
     }
-    double weight = 0.0d;
+
 
     void eat(Eatable e) {}
 

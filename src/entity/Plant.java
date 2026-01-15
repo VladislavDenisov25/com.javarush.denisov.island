@@ -6,4 +6,9 @@ public class Plant implements Eatable {
     public Eatable createEatable(Eatable eatable){
         return  new Plant();
     }
+
+    @Override
+    public String getEmoji() {
+        return "";
+    }
 }

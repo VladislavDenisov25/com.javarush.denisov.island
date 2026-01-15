@@ -1,6 +1,6 @@
 package util;
 
-import entity.Animal;
+
 import entity.Eatable;
 import entity.Plant;
 import entity.herbivore.*;
@@ -13,11 +13,11 @@ import java.util.Map;
 
 public final class Settings {
 
-   static final int X = 1;
-  static final int Y = 1;
+ public static final int X = 1;
+ public  static final int Y = 1;
 
-    static final int minCreatCountPredator = 5;
-    static final int minCreatCountHerbivore = 10;
+   public static final int minCreatCountPredator = 5;
+   public static final int minCreatCountHerbivore = 10;
 
    public final static Map<Eatable, Map<Eatable, Integer>> animalAttack = new HashMap<>() {{
 

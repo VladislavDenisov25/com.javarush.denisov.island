@@ -1,5 +1,6 @@
 package entity.predator;
 
-public class Bear extends Predator{
-
+public class Bear extends Predator {
+    public Bear() {
+    }
 }

@@ -6,8 +6,6 @@ import entity.Plant;
 import entity.herbivore.*;
 import entity.predator.*;
 
-
-
 import java.util.HashMap;
 import java.util.Map;
 

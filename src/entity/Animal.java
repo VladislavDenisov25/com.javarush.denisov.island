@@ -5,7 +5,7 @@ import entity.island.Island;
 import entity.island.Location;
 import entity.predator.*;
 
-import java.util.Random;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class Animal implements Eatable {
@@ -39,7 +39,7 @@ public abstract class Animal implements Eatable {
         int randomLocation= ThreadLocalRandom.current().nextInt(location.length);
         location[randomLocation].animalLiveCount.put(eatable, 1);
     }
-    double weigth = 0.0d;
+    double weight = 0.0d;
 
     void eat(Eatable e) {}
 

@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class Location {
 
-    private static Island island = Island.getInstance();
-    private static Location[] locations = island.getLocation();
+    private static final Island island = Island.getInstance();
+    private static final Location[] locations = island.getLocation();
 
     public Location() {
     }

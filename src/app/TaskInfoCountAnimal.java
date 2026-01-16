@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TaskInfoCountAnimal implements Runnable{
+public class TaskInfoCountAnimal implements Runnable {
     @Override
     public void run() {
         Map<Class, Integer> countAnimal = new HashMap<>();
@@ -22,7 +22,7 @@ public class TaskInfoCountAnimal implements Runnable{
             try {
                 Class<?> aClass = Class.forName(eatable.getName());
                 Eatable eatable1 = (Eatable) aClass.getDeclaredConstructor().newInstance();
-                System.out.printf("%s = %d ",eatable1.getEmoji() , countAnimal.get(eatable));
+                System.out.printf("%s = %d ", eatable1.getEmoji(), countAnimal.get(eatable));
             } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
                      | IllegalAccessException | InvocationTargetException e) {
                 throw new RuntimeException(e);

@@ -1,15 +1,10 @@
 package app;
 
-
-import entity.Eatable;
 import entity.herbivore.*;
 import entity.island.*;
 import entity.predator.*;
 import util.Settings;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -30,9 +25,6 @@ public class Game {
         executorCreatePlant.scheduleAtFixedRate(new TaskCreatePlant(), 0, 1, TimeUnit.SECONDS);
         ScheduledThreadPoolExecutor executorInfoCountAnimal = new ScheduledThreadPoolExecutor(3);
         executorInfoCountAnimal.scheduleAtFixedRate(new TaskInfoCountAnimal(), 0, 1, TimeUnit.SECONDS);
-
-
-
     }
 
     public void creatHerbivore() {
@@ -55,6 +47,7 @@ public class Game {
             ));
         }
     }
+
     public void creatPredator() {
         int countPredator = ThreadLocalRandom.current().nextInt(Settings.minCreatCountPredator, 100);
         for (int i = 0; i < countPredator; i++) {

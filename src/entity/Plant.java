@@ -9,7 +9,7 @@ public class Plant implements Eatable {
     String emojiPlant = Constants.emojiPlant;
 
     @Override
-    public Eatable createEatable(Eatable eatable){
+    public Eatable createEatable(Eatable eatable) {
         return new Plant();
     }
 
@@ -17,8 +17,9 @@ public class Plant implements Eatable {
     public String getEmoji() {
         return emojiPlant;
     }
-    public void setEatableLocation(Eatable eatable){
-        int randomLocation= ThreadLocalRandom.current().nextInt(location.length);
+
+    public void setEatableLocation(Eatable eatable) {
+        int randomLocation = ThreadLocalRandom.current().nextInt(location.length);
         location[randomLocation].animalLiveCount.put(eatable, 1);
     }
 }

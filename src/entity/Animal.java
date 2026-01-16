@@ -10,13 +10,13 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class Animal implements Eatable {
 
-  public double weight;
+    public double weight;
 
-   public String emoji;
+    public String emoji;
 
     @Override
-    public Eatable createEatable(Eatable eatable){
-        return switch (eatable.getClass().getSimpleName()){
+    public Eatable createEatable(Eatable eatable) {
+        return switch (eatable.getClass().getSimpleName()) {
             case "Wolf" -> new Wolf();
             case "Fox" -> new Fox();
             case "Eagle" -> new Eagle();
@@ -37,13 +37,13 @@ public abstract class Animal implements Eatable {
         };
     }
 
-    public void setEatableLocation(Eatable eatable){
-        int randomLocation= ThreadLocalRandom.current().nextInt(location.length);
+    public void setEatableLocation(Eatable eatable) {
+        int randomLocation = ThreadLocalRandom.current().nextInt(location.length);
         location[randomLocation].animalLiveCount.put(eatable, 1);
     }
 
-
-    void eat(Eatable e) {}
+    void eat(Eatable e) {
+    }
 
     void move(Location l) {
 

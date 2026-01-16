@@ -2,7 +2,7 @@ package entity.herbivore;
 
 import constants.Constants;
 
-public class Sheep extends Herbivore{
+public class Sheep extends Herbivore {
     public String emoji = Constants.emojiSheep;
 
     @Override

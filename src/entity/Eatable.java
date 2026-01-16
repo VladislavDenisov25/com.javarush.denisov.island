@@ -9,6 +9,8 @@ public interface Eatable {
     String emoji = "";
 
     Eatable createEatable(Eatable eatable);
+
     String getEmoji();
+
     void setEatableLocation(Eatable eatable);
 }

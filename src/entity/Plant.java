@@ -8,10 +8,10 @@ public class Plant implements Eatable {
 
     String emojiPlant = Constants.emojiPlant;
 
-    @Override
-    public Eatable createEatable(Eatable eatable) {
+    public static Eatable createEatable(Eatable eatable) {
         return new Plant();
     }
+
 
     @Override
     public String getEmoji() {

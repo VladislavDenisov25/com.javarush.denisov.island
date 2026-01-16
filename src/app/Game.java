@@ -1,18 +1,21 @@
 package app;
 
+import entity.Animal;
+import entity.Eatable;
 import entity.herbivore.*;
 import entity.island.*;
 import entity.predator.*;
+import util.Random;
 import util.Settings;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 public class Game {
 
-    Predator predator = new Predator();
-    Herbivore herbivore = new Herbivore();
+
 
     public void start() {
 
@@ -24,14 +27,16 @@ public class Game {
         ScheduledThreadPoolExecutor executorCreatePlant = new ScheduledThreadPoolExecutor(1);
         executorCreatePlant.scheduleAtFixedRate(new TaskCreatePlant(), 0, 1, TimeUnit.SECONDS);
         ScheduledThreadPoolExecutor executorInfoCountAnimal = new ScheduledThreadPoolExecutor(3);
-        executorInfoCountAnimal.scheduleAtFixedRate(new TaskInfoCountAnimal(), 0, 1, TimeUnit.SECONDS);
+        executorInfoCountAnimal.scheduleAtFixedRate(new TaskInfoCountAnimal(), 1, 10, TimeUnit.SECONDS);
+
+
     }
 
     public void creatHerbivore() {
-        int countHerbivore = ThreadLocalRandom.current().nextInt(Settings.minCreatCountHerbivore, 100);
+        int countHerbivore = Random.getRandomCount(Settings.minCreatCountHerbivore, 100);
         for (int i = 0; i < countHerbivore; i++) {
-            int animalNumberHerbivore = ThreadLocalRandom.current().nextInt(Settings.minCreatCountHerbivore);
-            herbivore.setEatableLocation(herbivore.createEatable(switch (animalNumberHerbivore) {
+            int animalNumberHerbivore = Random.getRandomCount(10);
+            Eatable.setEatableLocation(Eatable.createEatable(switch (animalNumberHerbivore) {
                         case 0 -> new Boar();
                         case 1 -> new Buffalo();
                         case 2 -> new Caterpillar();
@@ -49,10 +54,10 @@ public class Game {
     }
 
     public void creatPredator() {
-        int countPredator = ThreadLocalRandom.current().nextInt(Settings.minCreatCountPredator, 100);
+        int countPredator = Random.getRandomCount(Settings.minCreatCountPredator, 100);
         for (int i = 0; i < countPredator; i++) {
-            int animalNumberPredator = ThreadLocalRandom.current().nextInt(Settings.minCreatCountPredator);
-            predator.setEatableLocation(predator.createEatable(switch (animalNumberPredator) {
+            int animalNumberPredator = Random.getRandomCount(5);
+            Eatable.setEatableLocation(Eatable.createEatable(switch (animalNumberPredator) {
                         case 0 -> new Bear();
                         case 1 -> new Boa();
                         case 2 -> new Eagle();

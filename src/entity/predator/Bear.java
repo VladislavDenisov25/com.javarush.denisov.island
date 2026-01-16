@@ -1,8 +1,9 @@
 package entity.predator;
 
 import constants.Constants;
+import entity.Animal;
 
-public class Bear extends Predator {
+public class Bear extends Animal {
     public String emoji = Constants.emojiBear;
 
     @Override

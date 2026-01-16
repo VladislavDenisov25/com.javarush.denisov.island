@@ -17,11 +17,9 @@ public class Location {
         for (int i = 0; i < locations.length; i++) {
             if (locations[i] == null) {
                 locations[i] = new Location();
-                System.out.println("Новая локация добавлена!");
                 return;
             }
         }
-        System.out.println("Размер острова слишком мал!");
     }
 
     public Map<Eatable, Integer> animalLiveCount = new HashMap<>();  //тут находятся животные и растения с одной локации

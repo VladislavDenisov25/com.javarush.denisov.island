@@ -2,8 +2,9 @@ package entity.herbivore;
 
 
 import constants.Constants;
+import entity.Animal;
 
-public class Caterpillar extends Herbivore {
+public class Caterpillar extends Animal {
     public String emoji = Constants.emojiCaterpillar;
 
     @Override

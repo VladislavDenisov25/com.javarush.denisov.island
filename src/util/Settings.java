@@ -16,15 +16,11 @@ public final class Settings {
 
     public static final int minCreatCountPredator = 5;
     public static final int minCreatCountHerbivore = 10;
-    public static final int minCreatCountPlant = 5;
+    public static final int maxCreatCountPlant = 5;
 
     public final static Map<Eatable, Map<Eatable, Integer>> animalAttack = new HashMap<>() {{
 
         animalAttack.put(new Wolf(), new HashMap<>() {{
-            put(new Boa(), 0);
-            put(new Fox(), 0);
-            put(new Bear(), 0);
-            put(new Eagle(), 0);
             put(new Horse(), 10);
             put(new Deer(), 15);
             put(new Rabbit(), 60);
@@ -34,8 +30,6 @@ public final class Settings {
             put(new Boar(), 15);
             put(new Buffalo(), 10);
             put(new Duck(), 40);
-            put(new Caterpillar(), 0);
-            put(new Plant(), 0);
         }});
 
         animalAttack.put(new Boa(), new HashMap<>() {{

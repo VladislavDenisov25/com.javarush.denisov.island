@@ -24,10 +24,14 @@ public class Game {
         for (int i = 0; i < 10; i++) {
             Location.newLocation();
         }
-        ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1);
-        scheduledThreadPoolExecutor.scheduleAtFixedRate(new TaskCreatePlant(), 1, 5, TimeUnit.SECONDS);
         creatHerbivore();
         creatPredator();
+        ScheduledThreadPoolExecutor executorCreatePlant = new ScheduledThreadPoolExecutor(1);
+        executorCreatePlant.scheduleAtFixedRate(new TaskCreatePlant(), 0, 1, TimeUnit.SECONDS);
+        ScheduledThreadPoolExecutor executorInfoCountAnimal = new ScheduledThreadPoolExecutor(3);
+        executorInfoCountAnimal.scheduleAtFixedRate(new TaskInfoCountAnimal(), 0, 1, TimeUnit.SECONDS);
+
+
 
     }
 
@@ -65,26 +69,5 @@ public class Game {
                     }
             ));
         }
-    }
-    public void infoCountAnimal() {
-        Map<Class, Integer> countAnimal = new HashMap<>();
-
-        for (Location location : Island.getInstance().getLocation()) {
-            for (Eatable eatable : location.animalLiveCount.keySet()) {
-                countAnimal.merge(eatable.getClass(), 1, Integer::sum);
-            }
-        }
-
-        for (Class eatable : countAnimal.keySet()) {
-            try {
-                Class<?> aClass = Class.forName(eatable.getName());
-                Eatable eatable1 = (Eatable) aClass.getDeclaredConstructor().newInstance();
-                System.out.printf("%s = %d ",eatable1.getEmoji() , countAnimal.get(eatable));
-            } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
-                     | IllegalAccessException | InvocationTargetException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        System.out.println();
     }
 }

@@ -10,8 +10,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class Animal implements Eatable {
 
-    public Location[] location = Island.getInstance().getLocation();
-
   public double weight;
 
    public String emoji;

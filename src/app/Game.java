@@ -10,7 +10,9 @@ import util.Settings;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
 public class Game {
 
@@ -22,11 +24,11 @@ public class Game {
         for (int i = 0; i < 10; i++) {
             Location.newLocation();
         }
-        infoCountAnimal();
+        ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1);
+        scheduledThreadPoolExecutor.scheduleAtFixedRate(new TaskCreatePlant(), 1, 5, TimeUnit.SECONDS);
         creatHerbivore();
-        infoCountAnimal();
         creatPredator();
-        infoCountAnimal();
+
     }
 
     public void creatHerbivore() {

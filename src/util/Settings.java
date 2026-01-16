@@ -16,6 +16,7 @@ public final class Settings {
 
    public static final int minCreatCountPredator = 5;
    public static final int minCreatCountHerbivore = 10;
+   public static final int minCreatCountPlant= 5;
 
    public final static Map<Eatable, Map<Eatable, Integer>> animalAttack = new HashMap<>() {{
 

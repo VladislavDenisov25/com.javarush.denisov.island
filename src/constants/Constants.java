@@ -17,6 +17,7 @@ public interface Constants {
     String emojiEagle = "\uD83E\uDD85";
     String emojiFox = "\uD83E\uDD8A";
     String emojiWolf = "\uD83D\uDC3A";
+    String emojiPlant = "\uD83C\uDF31";
 
 
 

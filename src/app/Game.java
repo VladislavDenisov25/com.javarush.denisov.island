@@ -1,6 +1,5 @@
 package app;
 
-import entity.Organism;
 import entity.OrganismType;
 import entity.island.*;
 import util.Random;
@@ -28,7 +27,7 @@ public class Game {
         for (OrganismType value : values) {
             int randomCount = Random.getRandomCount(Settings.minCreatCountEatable, value.getMaxCountCell());
             for (int i = 0; i < randomCount; i++) {
-                Organism.setEatableLocation(FactoryCreateOrganism.createEatable(value));
+              FactoryCreateOrganism.createEatable(value);
             }
         }
     }

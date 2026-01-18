@@ -3,12 +3,18 @@ package app;
 import entity.Organism;
 import entity.OrganismType;
 import entity.herbivore.*;
+import entity.island.Island;
+import entity.island.Location;
 import entity.plant.Grass;
 import entity.predator.*;
+import util.Random;
 
-public abstract class FactoryCreateOrganism {
-   public static Organism createEatable(OrganismType type){
-     return switch (OrganismType.valueOf(String.valueOf(type))){
+public class FactoryCreateOrganism {
+
+    static Location[] location = Island.getInstance().getLocation();
+
+   public static void createEatable(OrganismType type){
+     Organism organism = switch (OrganismType.valueOf(String.valueOf(type))){
          case BOAR -> new Boar();
          case BUFFALO -> new Buffalo();
          case CATERPILLAR -> new Caterpillar();
@@ -25,7 +31,8 @@ public abstract class FactoryCreateOrganism {
          case FOX -> new Fox();
          case WOLF -> new Wolf();
          case GRASS -> new Grass();
-         default -> throw new IllegalStateException("Такого организма не существует: " + type.getClass().getSimpleName());
      };
+       int index = Random.getRandomCount(location.length);
+       location[index].animalLiveCount.put(organism, 1);
    }
 }

@@ -14,16 +14,17 @@ public class TaskInfoCountAnimal implements Runnable {
     public void run() {
         Map<Class, Integer> countAnimal = new HashMap<>();
 
+
         for (Location location : Island.getInstance().getLocation()) {
             for (Organism organism : location.animalLiveCount.keySet()) {
                 countAnimal.merge(organism.getClass(), 1, Integer::sum);
             }
         }
-        for (Class eatable : countAnimal.keySet()) {
-            String simpleName = eatable.getSimpleName();
-            OrganismType organismType = OrganismType.valueOf(simpleName);
-            System.out.printf("%s = %d ", organismType.getEmojiOrganism(), countAnimal.get(eatable));
+        for (Class aClass : countAnimal.keySet()) {
+            String upperCase = aClass.getSimpleName().toUpperCase();
+            OrganismType type = OrganismType.valueOf(upperCase);
+            System.out.printf("%s = %d ", type.getEmojiOrganism(), countAnimal.get(aClass));
         }
-        System.out.println("S");
+        System.out.println();
     }
 }

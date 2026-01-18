@@ -2,7 +2,6 @@ package app;
 
 import entity.Organism;
 import entity.OrganismType;
-import entity.Plant;
 import entity.herbivore.*;
 import entity.plant.Grass;
 import entity.predator.*;
@@ -26,7 +25,7 @@ public abstract class FactoryCreateOrganism {
          case FOX -> new Fox();
          case WOLF -> new Wolf();
          case GRASS -> new Grass();
-         default -> throw new IllegalStateException("Фабрика не работает с классом: " + type.getClass().getSimpleName());
+         default -> throw new IllegalStateException("Такого организма не существует: " + type.getClass().getSimpleName());
      };
    }
 }

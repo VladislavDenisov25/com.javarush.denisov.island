@@ -1,12 +1,7 @@
 package entity;
 
-import entity.herbivore.*;
-import entity.island.Island;
 import entity.island.Location;
-import entity.predator.*;
-
-
-import java.util.concurrent.ThreadLocalRandom;
+import util.Random;
 
 public abstract class Animal implements Eatable {
 

@@ -14,8 +14,7 @@ public final class Settings {
     public static final int X = 10;
     public static final int Y = 1;
 
-    public static final int minCreatCountPredator = 5;
-    public static final int minCreatCountHerbivore = 10;
+    public static final int minCreatCountAnimal = 1;
     public static final int maxCreatCountPlant = 5;
 
     public final static Map<Eatable, Map<Eatable, Integer>> animalAttack = new HashMap<>() {{
@@ -286,23 +285,23 @@ public final class Settings {
 
     }};
 
-    public final static Map<Eatable, Integer> animalMaxCount = new HashMap<>() {{
-        put(new Wolf(), 30);
-        put(new Boa(), 30);
-        put(new Fox(), 30);
-        put(new Bear(), 5);
-        put(new Eagle(), 20);
-        put(new Horse(), 20);
-        put(new Deer(), 20);
-        put(new Rabbit(), 150);
-        put(new Mouse(), 500);
-        put(new Goat(), 140);
-        put(new Sheep(), 140);
-        put(new Boar(), 50);
-        put(new Buffalo(), 10);
-        put(new Duck(), 200);
-        put(new Caterpillar(), 1000);
-        put(new Plant(), 200);
+    public final static Map<Class, Integer> animalMaxCount = new HashMap<>() {{
+        put(Wolf.class, 30);
+        put(Boa.class, 30);
+        put(Fox.class, 30);
+        put(Bear.class, 5);
+        put(Eagle.class, 20);
+        put(Horse.class, 20);
+        put(Deer.class, 20);
+        put(Rabbit.class, 150);
+        put(Mouse.class, 500);
+        put(Goat.class, 140);
+        put(Sheep.class, 140);
+        put(Boar.class, 50);
+        put(Buffalo.class, 10);
+        put(Duck.class, 200);
+        put(Caterpillar.class, 1000);
+        put(Plant.class, 200);
     }};
 
     public final static Map<Eatable, Integer> animalMaxMove = new HashMap<>() {{

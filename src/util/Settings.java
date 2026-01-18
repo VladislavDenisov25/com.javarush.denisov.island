@@ -7,7 +7,9 @@ import entity.Plant;
 import entity.herbivore.*;
 import entity.predator.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public final class Settings {
@@ -18,7 +20,7 @@ public final class Settings {
     public static final int minCreatCountAnimal = 1;
     public static final int maxCreatCountPlant = 5;
 
-    public final static Map<Class<? extends Eatable>, Map<Class<? extends Eatable>, Integer>> animalAttack = new HashMap<>() {{
+    public final  Map<Class, Map<Class, Integer>> animalAttack = new HashMap<>() {{
 
         animalAttack.put(Wolf.class, new HashMap<>() {{
             put(Horse.class, 10);
@@ -109,7 +111,7 @@ public final class Settings {
 
     }};
 
-    public final static Map<Class<? extends Eatable>, Integer> animalMaxCount = new HashMap<>() {{
+    public final static Map<Class, Integer> animalMaxCount = new HashMap<>() {{
         put(Wolf.class, 30);
         put(Boa.class, 30);
         put(Fox.class, 30);
@@ -128,7 +130,7 @@ public final class Settings {
         put(Plant.class, 200);
     }};
 
-    public final static Map<Class<? extends Eatable>, Integer> animalMaxMove = new HashMap<>() {{
+    public final static Map<Class, Integer> animalMaxMove = new HashMap<>() {{
         put(Wolf.class, 3);
         put(Boa.class, 1);
         put(Fox.class, 2);
@@ -146,7 +148,7 @@ public final class Settings {
         put(Caterpillar.class, 0);
     }};
 
-    public final static Map<Class<? extends Eatable>, Double> eatableWeigth = new HashMap<>() {{
+    public final static Map<Class, Double> eatableWeigth = new HashMap<>() {{
         put(Wolf.class, 50d);
         put(Boa.class, 15d);
         put(Fox.class, 8d);
@@ -163,6 +165,24 @@ public final class Settings {
         put(Duck.class, 1d);
         put(Caterpillar.class, 0.01d);
         put(Plant.class, 1d);
+    }};
+
+    public final static List<Eatable> animalIsland = new ArrayList<>() {{
+        add(new Wolf());
+        add(new Boa());
+        add(new Fox());
+        add(new Bear());
+        add(new Eagle());
+        add(new Horse());
+        add(new Deer());
+        add(new Rabbit());
+        add(new Mouse());
+        add(new Goat());
+        add(new Sheep());
+        add(new Boar());
+        add(new Buffalo());
+        add(new Duck());
+        add(new Caterpillar());
     }};
 
 }

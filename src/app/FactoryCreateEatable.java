@@ -15,6 +15,7 @@ public abstract class FactoryCreateEatable {
            case "Duck" -> new Duck();
            case "Goat" -> new Goat();
            case "Horse" -> new Horse();
+           case "Mouse" -> new Mouse();
            case "Rabbit" -> new Rabbit();
            case "Sheep" -> new Sheep();
            case "Bear" -> new Bear();
@@ -23,7 +24,7 @@ public abstract class FactoryCreateEatable {
            case "Fox" -> new Fox();
            case "Wolf" -> new Wolf();
            case "Plant" -> new Plant();
-         default -> throw new IllegalStateException("Unexpected value: " + eatable.getClass().getSimpleName());
+         default -> throw new IllegalStateException("Фабрика не работает с классом: " + eatable.getClass().getSimpleName());
      };
    }
 }

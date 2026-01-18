@@ -1,5 +1,6 @@
 package app;
 
+import entity.Animal;
 import entity.Eatable;
 import entity.herbivore.*;
 import entity.island.*;
@@ -8,6 +9,7 @@ import util.Random;
 import util.Settings;
 
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +19,11 @@ public class Game {
 
         for (int i = 0; i < 10; i++) {
             Location.newLocation();
+        }
+
+
+        for (Eatable eatable : Settings.animalIsland) {
+            createEatable(eatable);
         }
 
         ScheduledThreadPoolExecutor executorCreatePlant = new ScheduledThreadPoolExecutor(1);

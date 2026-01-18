@@ -8,13 +8,12 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class Game {
-
+    Island island = Island.getInstance();
     public void start() {
 
-        for (int i = 0; i < 10; i++) {
-            Location.newLocation();
-        }
         createOrganizm();
+
+        System.out.println(island.getLocation().length);
         ScheduledThreadPoolExecutor executorInfoCountAnimal = new ScheduledThreadPoolExecutor(1);
         executorInfoCountAnimal.scheduleAtFixedRate(new TaskInfoCountAnimal(), 0, 10, TimeUnit.SECONDS);
         ScheduledThreadPoolExecutor executorCreatePlant = new ScheduledThreadPoolExecutor(1);

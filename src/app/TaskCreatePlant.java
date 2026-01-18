@@ -1,8 +1,7 @@
 package app;
 
-import entity.Eatable;
-import entity.EatableType;
-import entity.Plant;
+import entity.Organism;
+import entity.OrganismType;
 import util.Settings;
 
 import util.Random;
@@ -13,9 +12,9 @@ public class TaskCreatePlant implements Runnable {
     @Override
     public void run() {
 
-        int countPlant = Random.getRandomCount(1, Settings.maxCreatCountPlant);
+        int countPlant = Random.getRandomCount(Settings.minCreatCountEatable, OrganismType.GRASS.getMaxCountCell());
         for (int i = 0; i < countPlant; i++) {
-            Eatable.setEatableLocation(FactoryCreateEatable.createEatable(EatableType.PLANT));
+            Organism.setEatableLocation(FactoryCreateOrganism.createEatable(OrganismType.GRASS));
         }
         System.out.printf("На острове выросла новая трава в количестве %d\n", countPlant);
     }

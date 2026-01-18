@@ -1,14 +1,15 @@
 package app;
 
-import entity.Eatable;
-import entity.EatableType;
+import entity.Organism;
+import entity.OrganismType;
 import entity.Plant;
 import entity.herbivore.*;
+import entity.plant.Grass;
 import entity.predator.*;
 
-public abstract class FactoryCreateEatable {
-   public static Eatable createEatable(EatableType type){
-     return switch (EatableType.valueOf(String.valueOf(type))){
+public abstract class FactoryCreateOrganism {
+   public static Organism createEatable(OrganismType type){
+     return switch (OrganismType.valueOf(String.valueOf(type))){
          case BOAR -> new Boar();
          case BUFFALO -> new Buffalo();
          case CATERPILLAR -> new Caterpillar();
@@ -24,7 +25,7 @@ public abstract class FactoryCreateEatable {
          case EAGLE -> new Eagle();
          case FOX -> new Fox();
          case WOLF -> new Wolf();
-         case PLANT -> new Plant();
+         case GRASS -> new Grass();
          default -> throw new IllegalStateException("Фабрика не работает с классом: " + type.getClass().getSimpleName());
      };
    }

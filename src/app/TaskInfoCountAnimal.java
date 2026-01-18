@@ -1,6 +1,7 @@
 package app;
 
-import entity.Eatable;
+import entity.Organism;
+import entity.OrganismType;
 import entity.island.Island;
 import entity.island.Location;
 
@@ -14,20 +15,15 @@ public class TaskInfoCountAnimal implements Runnable {
         Map<Class, Integer> countAnimal = new HashMap<>();
 
         for (Location location : Island.getInstance().getLocation()) {
-            for (Eatable eatable : location.animalLiveCount.keySet()) {
-                countAnimal.merge(eatable.getClass(), 1, Integer::sum);
+            for (Organism organism : location.animalLiveCount.keySet()) {
+                countAnimal.merge(organism.getClass(), 1, Integer::sum);
             }
         }
         for (Class eatable : countAnimal.keySet()) {
-            try {
-                Class<?> aClass = Class.forName(eatable.getName());
-                Eatable eatable1 = (Eatable) aClass.getDeclaredConstructor().newInstance();
-                System.out.printf("%s = %d ", eatable1.getEmoji(), countAnimal.get(eatable));
-            } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
-                     | IllegalAccessException | InvocationTargetException e) {
-                throw new RuntimeException(e);
-            }
+            String simpleName = eatable.getSimpleName();
+            OrganismType organismType = OrganismType.valueOf(simpleName);
+            System.out.printf("%s = %d ", organismType.getEmojiOrganism(), countAnimal.get(eatable));
         }
-        System.out.println();
+        System.out.println("S");
     }
 }

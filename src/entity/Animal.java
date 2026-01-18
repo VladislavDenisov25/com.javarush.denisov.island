@@ -1,15 +1,11 @@
 package entity;
 
 import entity.island.Location;
-import util.Random;
 
-public abstract class Animal implements Eatable {
+public abstract class Animal implements Organism {
 
-    public double weight;
 
-    public String emoji;
-
-    void eat(Eatable e) {
+    void eat(Organism e) {
     }
 
     void move(Location l) {

@@ -1,6 +1,6 @@
 package entity.island;
 
-import entity.Eatable;
+import entity.Organism;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,5 +22,5 @@ public class Location {
         }
     }
 
-    public Map<Eatable, Integer> animalLiveCount = new HashMap<>();  //тут находятся животные и растения с одной локации
+    public Map<Organism, Integer> animalLiveCount = new HashMap<>();  //тут находятся животные и растения с одной локации
 }

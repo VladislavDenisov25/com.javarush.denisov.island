@@ -1,7 +1,6 @@
 package entity.island;
 
 import entity.Organism;
-
 import java.util.HashMap;
 import java.util.Map;
 

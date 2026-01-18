@@ -4,7 +4,6 @@ import entity.island.Location;
 
 public abstract class Animal implements Organism {
 
-
     void eat(Organism e) {
     }
 
@@ -13,7 +12,7 @@ public abstract class Animal implements Organism {
     }
 
     void multiply() {
-
+        
     }
 
     void die() {

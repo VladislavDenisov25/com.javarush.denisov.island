@@ -1,4 +1,4 @@
-package app;
+package repository;
 
 import entity.Organism;
 import entity.OrganismType;
@@ -9,7 +9,7 @@ import entity.plant.Grass;
 import entity.predator.*;
 import util.Random;
 
-public class FactoryCreateOrganism {
+public class Fabric {
 
     static Location[] location = Island.getInstance().getLocation();
 

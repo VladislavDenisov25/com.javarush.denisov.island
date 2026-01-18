@@ -1,6 +1,7 @@
-package app;
+package services;
 
 import entity.OrganismType;
+import repository.Fabric;
 import util.Settings;
 
 import util.Random;
@@ -13,7 +14,7 @@ public class TaskCreatePlant implements Runnable {
 
         int countPlant = Random.getRandomCount(Settings.minCreatCountEatable, OrganismType.GRASS.getMaxCountCell());
         for (int i = 0; i < countPlant; i++) {
-           FactoryCreateOrganism.createEatable(OrganismType.GRASS);
+           Fabric.createEatable(OrganismType.GRASS);
         }
         System.out.printf("На острове выросла новая трава в количестве %d\n", countPlant);
     }

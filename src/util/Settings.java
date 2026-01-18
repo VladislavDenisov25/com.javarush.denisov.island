@@ -1,6 +1,7 @@
 package util;
 
 
+import entity.Animal;
 import entity.Eatable;
 import entity.Plant;
 import entity.herbivore.*;
@@ -17,275 +18,98 @@ public final class Settings {
     public static final int minCreatCountAnimal = 1;
     public static final int maxCreatCountPlant = 5;
 
-    public final static Map<Eatable, Map<Eatable, Integer>> animalAttack = new HashMap<>() {{
+    public final static Map<Class<? extends Eatable>, Map<Class<? extends Eatable>, Integer>> animalAttack = new HashMap<>() {{
 
-        animalAttack.put(new Wolf(), new HashMap<>() {{
-            put(new Horse(), 10);
-            put(new Deer(), 15);
-            put(new Rabbit(), 60);
-            put(new Mouse(), 80);
-            put(new Goat(), 60);
-            put(new Sheep(), 70);
-            put(new Boar(), 15);
-            put(new Buffalo(), 10);
-            put(new Duck(), 40);
+        animalAttack.put(Wolf.class, new HashMap<>() {{
+            put(Horse.class, 10);
+            put(Deer.class, 15);
+            put(Rabbit.class, 60);
+            put(Mouse.class, 80);
+            put(Goat.class, 60);
+            put(Sheep.class, 70);
+            put(Bear.class, 15);
+            put(Buffalo.class, 10);
+            put(Duck.class, 40);
         }});
 
-        animalAttack.put(new Boa(), new HashMap<>() {{
-            put(new Wolf(), 0);
-            put(new Fox(), 15);
-            put(new Bear(), 0);
-            put(new Eagle(), 0);
-            put(new Horse(), 0);
-            put(new Deer(), 0);
-            put(new Rabbit(), 20);
-            put(new Mouse(), 40);
-            put(new Goat(), 0);
-            put(new Sheep(), 0);
-            put(new Boar(), 0);
-            put(new Buffalo(), 0);
-            put(new Duck(), 10);
-            put(new Caterpillar(), 0);
-            put(new Plant(), 0);
+        animalAttack.put(Boa.class, new HashMap<>() {{
+            put(Fox.class, 15);
+            put(Rabbit.class, 20);
+            put(Mouse.class, 40);
+            put(Duck.class, 10);
         }});
 
-        animalAttack.put(new Fox(), new HashMap<>() {{
-            put(new Wolf(), 0);
-            put(new Boa(), 0);
-            put(new Bear(), 0);
-            put(new Eagle(), 0);
-            put(new Horse(), 0);
-            put(new Deer(), 0);
-            put(new Rabbit(), 70);
-            put(new Mouse(), 90);
-            put(new Goat(), 0);
-            put(new Sheep(), 0);
-            put(new Boar(), 0);
-            put(new Buffalo(), 0);
-            put(new Duck(), 60);
-            put(new Caterpillar(), 40);
-            put(new Plant(), 0);
+        animalAttack.put(Fox.class, new HashMap<>() {{
+            put(Rabbit.class, 70);
+            put(Mouse.class, 90);
+            put(Duck.class, 60);
+            put(Caterpillar.class, 40);
         }});
 
-        animalAttack.put(new Bear(), new HashMap<>() {{
-            put(new Wolf(), 0);
-            put(new Boa(), 80);
-            put(new Fox(), 0);
-            put(new Eagle(), 0);
-            put(new Horse(), 40);
-            put(new Deer(), 80);
-            put(new Rabbit(), 80);
-            put(new Mouse(), 90);
-            put(new Goat(), 0);
-            put(new Sheep(), 0);
-            put(new Boar(), 0);
-            put(new Buffalo(), 0);
-            put(new Duck(), 60);
-            put(new Caterpillar(), 40);
-            put(new Plant(), 0);
+        animalAttack.put(Bear.class, new HashMap<>() {{
+            put(Boa.class, 80);
+            put(Horse.class, 40);
+            put(Deer.class, 80);
+            put(Rabbit.class, 80);
+            put(Mouse.class, 90);
+            put(Duck.class, 60);
+            put(Caterpillar.class, 40);
         }});
 
-        animalAttack.put(new Eagle(), new HashMap<>() {{
-            put(new Wolf(), 0);
-            put(new Boa(), 0);
-            put(new Fox(), 10);
-            put(new Bear(), 0);
-            put(new Horse(), 0);
-            put(new Deer(), 0);
-            put(new Rabbit(), 90);
-            put(new Mouse(), 90);
-            put(new Goat(), 0);
-            put(new Sheep(), 0);
-            put(new Boar(), 0);
-            put(new Buffalo(), 0);
-            put(new Duck(), 80);
-            put(new Caterpillar(), 0);
-            put(new Plant(), 0);
+        animalAttack.put(Eagle.class, new HashMap<>() {{
+            put(Fox.class, 10);
+            put(Rabbit.class, 90);
+            put(Mouse.class, 90);
+            put(Duck.class, 80);
         }});
 
-        animalAttack.put(new Horse(), new HashMap<>() {{
-            put(new Wolf(), 0);
-            put(new Boa(), 0);
-            put(new Fox(), 0);
-            put(new Bear(), 0);
-            put(new Eagle(), 0);
-            put(new Deer(), 0);
-            put(new Rabbit(), 0);
-            put(new Mouse(), 0);
-            put(new Goat(), 0);
-            put(new Sheep(), 0);
-            put(new Boar(), 0);
-            put(new Buffalo(), 0);
-            put(new Duck(), 0);
-            put(new Caterpillar(), 0);
-            put(new Plant(), 100);
+        animalAttack.put(Horse.class, new HashMap<>() {{
+            put(Plant.class, 100);
         }});
 
-        animalAttack.put(new Deer(), new HashMap<>() {{
-            put(new Wolf(), 0);
-            put(new Boa(), 0);
-            put(new Fox(), 0);
-            put(new Bear(), 0);
-            put(new Eagle(), 0);
-            put(new Horse(), 0);
-            put(new Rabbit(), 0);
-            put(new Mouse(), 0);
-            put(new Goat(), 0);
-            put(new Sheep(), 0);
-            put(new Boar(), 0);
-            put(new Buffalo(), 0);
-            put(new Duck(), 0);
-            put(new Caterpillar(), 0);
-            put(new Plant(), 100);
+        animalAttack.put(Deer.class, new HashMap<>() {{
+            put(Plant.class, 100);
         }});
 
-        animalAttack.put(new Rabbit(), new HashMap<>() {{
-            put(new Wolf(), 0);
-            put(new Boa(), 0);
-            put(new Fox(), 0);
-            put(new Bear(), 0);
-            put(new Eagle(), 0);
-            put(new Horse(), 0);
-            put(new Deer(), 0);
-            put(new Mouse(), 0);
-            put(new Goat(), 0);
-            put(new Sheep(), 0);
-            put(new Boar(), 0);
-            put(new Buffalo(), 0);
-            put(new Duck(), 0);
-            put(new Caterpillar(), 0);
-            put(new Plant(), 100);
+        animalAttack.put(Rabbit.class, new HashMap<>() {{
+            put(Plant.class, 100);
         }});
 
-        animalAttack.put(new Mouse(), new HashMap<>() {{
-            put(new Wolf(), 0);
-            put(new Boa(), 0);
-            put(new Fox(), 0);
-            put(new Bear(), 0);
-            put(new Eagle(), 0);
-            put(new Horse(), 0);
-            put(new Deer(), 0);
-            put(new Rabbit(), 0);
-            put(new Goat(), 0);
-            put(new Sheep(), 0);
-            put(new Boar(), 0);
-            put(new Buffalo(), 0);
-            put(new Duck(), 0);
-            put(new Caterpillar(), 90);
-            put(new Plant(), 100);
+        animalAttack.put(Mouse.class, new HashMap<>() {{
+            put(Caterpillar.class, 90);
+            put(Plant.class, 100);
         }});
 
-        animalAttack.put(new Goat(), new HashMap<>() {{
-            put(new Wolf(), 0);
-            put(new Boa(), 0);
-            put(new Fox(), 0);
-            put(new Bear(), 0);
-            put(new Eagle(), 0);
-            put(new Horse(), 0);
-            put(new Deer(), 0);
-            put(new Rabbit(), 0);
-            put(new Mouse(), 0);
-            put(new Sheep(), 0);
-            put(new Boar(), 0);
-            put(new Buffalo(), 0);
-            put(new Duck(), 0);
-            put(new Caterpillar(), 0);
-            put(new Plant(), 100);
+        animalAttack.put(Goat.class, new HashMap<>() {{
+            put(Plant.class, 100);
         }});
 
-        animalAttack.put(new Sheep(), new HashMap<>() {{
-            put(new Wolf(), 0);
-            put(new Boa(), 0);
-            put(new Fox(), 0);
-            put(new Bear(), 0);
-            put(new Eagle(), 0);
-            put(new Horse(), 0);
-            put(new Deer(), 0);
-            put(new Rabbit(), 0);
-            put(new Mouse(), 0);
-            put(new Goat(), 0);
-            put(new Boar(), 0);
-            put(new Buffalo(), 0);
-            put(new Duck(), 0);
-            put(new Caterpillar(), 0);
-            put(new Plant(), 100);
+        animalAttack.put(Sheep.class, new HashMap<>() {{
+            put(Plant.class, 100);
         }});
 
-        animalAttack.put(new Boar(), new HashMap<>() {{
-            put(new Wolf(), 0);
-            put(new Boa(), 0);
-            put(new Fox(), 0);
-            put(new Bear(), 0);
-            put(new Eagle(), 0);
-            put(new Horse(), 0);
-            put(new Deer(), 0);
-            put(new Rabbit(), 0);
-            put(new Mouse(), 50);
-            put(new Goat(), 0);
-            put(new Sheep(), 0);
-            put(new Buffalo(), 0);
-            put(new Duck(), 0);
-            put(new Caterpillar(), 90);
-            put(new Plant(), 100);
+        animalAttack.put(Boar.class, new HashMap<>() {{
+            put(Mouse.class, 50);
+            put(Caterpillar.class, 90);
+            put(Plant.class, 100);
         }});
 
-        animalAttack.put(new Buffalo(), new HashMap<>() {{
-            put(new Wolf(), 0);
-            put(new Boa(), 0);
-            put(new Fox(), 0);
-            put(new Bear(), 0);
-            put(new Eagle(), 0);
-            put(new Horse(), 0);
-            put(new Deer(), 0);
-            put(new Rabbit(), 0);
-            put(new Mouse(), 0);
-            put(new Goat(), 0);
-            put(new Sheep(), 0);
-            put(new Boar(), 0);
-            put(new Duck(), 0);
-            put(new Caterpillar(), 0);
-            put(new Plant(), 100);
+        animalAttack.put(Buffalo.class, new HashMap<>() {{
+            put(Plant.class, 100);
         }});
 
-        animalAttack.put(new Duck(), new HashMap<>() {{
-            put(new Wolf(), 0);
-            put(new Boa(), 0);
-            put(new Fox(), 0);
-            put(new Bear(), 0);
-            put(new Eagle(), 0);
-            put(new Horse(), 0);
-            put(new Deer(), 0);
-            put(new Rabbit(), 0);
-            put(new Mouse(), 0);
-            put(new Goat(), 0);
-            put(new Sheep(), 0);
-            put(new Boar(), 0);
-            put(new Buffalo(), 0);
-            put(new Caterpillar(), 90);
-            put(new Plant(), 100);
+        animalAttack.put(Duck.class, new HashMap<>() {{
+            put(Caterpillar.class, 90);
+            put(Plant.class, 100);
         }});
 
-        animalAttack.put(new Caterpillar(), new HashMap<>() {{
-            put(new Wolf(), 0);
-            put(new Boa(), 0);
-            put(new Fox(), 0);
-            put(new Bear(), 0);
-            put(new Eagle(), 0);
-            put(new Horse(), 0);
-            put(new Deer(), 0);
-            put(new Rabbit(), 0);
-            put(new Mouse(), 0);
-            put(new Goat(), 0);
-            put(new Sheep(), 0);
-            put(new Boar(), 0);
-            put(new Buffalo(), 0);
-            put(new Duck(), 0);
-            put(new Plant(), 100);
+        animalAttack.put(Caterpillar.class, new HashMap<>() {{
+            put(Plant.class, 100);
         }});
 
     }};
 
-    public final static Map<Class, Integer> animalMaxCount = new HashMap<>() {{
+    public final static Map<Class<? extends Eatable>, Integer> animalMaxCount = new HashMap<>() {{
         put(Wolf.class, 30);
         put(Boa.class, 30);
         put(Fox.class, 30);
@@ -304,41 +128,41 @@ public final class Settings {
         put(Plant.class, 200);
     }};
 
-    public final static Map<Eatable, Integer> animalMaxMove = new HashMap<>() {{
-        put(new Wolf(), 3);
-        put(new Boa(), 1);
-        put(new Fox(), 2);
-        put(new Bear(), 2);
-        put(new Eagle(), 3);
-        put(new Horse(), 4);
-        put(new Deer(), 4);
-        put(new Rabbit(), 2);
-        put(new Mouse(), 1);
-        put(new Goat(), 3);
-        put(new Sheep(), 3);
-        put(new Boar(), 2);
-        put(new Buffalo(), 3);
-        put(new Duck(), 4);
-        put(new Caterpillar(), 0);
+    public final static Map<Class<? extends Eatable>, Integer> animalMaxMove = new HashMap<>() {{
+        put(Wolf.class, 3);
+        put(Boa.class, 1);
+        put(Fox.class, 2);
+        put(Bear.class, 2);
+        put(Eagle.class, 3);
+        put(Horse.class, 4);
+        put(Deer.class, 4);
+        put(Rabbit.class, 2);
+        put(Mouse.class, 1);
+        put(Goat.class, 3);
+        put(Sheep.class, 3);
+        put(Boar.class, 2);
+        put(Buffalo.class, 3);
+        put(Duck.class, 4);
+        put(Caterpillar.class, 0);
     }};
 
-    public final static Map<Eatable, Double> eatableWeigth = new HashMap<>() {{
-        put(new Wolf(), 50d);
-        put(new Boa(), 15d);
-        put(new Fox(), 8d);
-        put(new Bear(), 500d);
-        put(new Eagle(), 6d);
-        put(new Horse(), 400d);
-        put(new Deer(), 300d);
-        put(new Rabbit(), 2d);
-        put(new Mouse(), 0.05d);
-        put(new Goat(), 60d);
-        put(new Sheep(), 70d);
-        put(new Boar(), 400d);
-        put(new Buffalo(), 700d);
-        put(new Duck(), 1d);
-        put(new Caterpillar(), 0.01d);
-        put(new Plant(), 1d);
+    public final static Map<Class<? extends Eatable>, Double> eatableWeigth = new HashMap<>() {{
+        put(Wolf.class, 50d);
+        put(Boa.class, 15d);
+        put(Fox.class, 8d);
+        put(Bear.class, 500d);
+        put(Eagle.class, 6d);
+        put(Horse.class, 400d);
+        put(Deer.class, 300d);
+        put(Rabbit.class, 2d);
+        put(Mouse.class, 0.05d);
+        put(Goat.class, 60d);
+        put(Sheep.class, 70d);
+        put(Boar.class, 400d);
+        put(Buffalo.class, 700d);
+        put(Duck.class, 1d);
+        put(Caterpillar.class, 0.01d);
+        put(Plant.class, 1d);
     }};
 
 }

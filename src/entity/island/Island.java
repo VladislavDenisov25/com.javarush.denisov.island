@@ -4,13 +4,15 @@ import util.Settings;
 
 public class Island {
 
-    private static final Location[] location = new Location[Settings.X * Settings.Y];
-    public static Island island;
+    private static final Location[][] location = new Location[Settings.COLUMNS][Settings.LINES];
+    private static Island island;
 
     private Island() {
-        for (int i = 0; i < location.length; i++) {
-            if (location[i] == null) {
-                location[i] = new Location();
+        for (int x = 0; x < location.length; x++) {
+            for (int y = 0; y < location[x].length; y++) {
+                if (location[x][y] == null){
+                    location[x][y] = new Location();
+                }
             }
         }
     }
@@ -22,7 +24,7 @@ public class Island {
         return island;
     }
 
-    public Location[] getLocation() {
+    public Location[][] getLocation() {
         return location;
     }
 }

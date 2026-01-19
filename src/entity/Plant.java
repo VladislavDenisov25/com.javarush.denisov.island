@@ -1,5 +1,5 @@
 package entity;
 
-public abstract class Plant implements Organism {
+public abstract class Plant extends Organism {
 
 }

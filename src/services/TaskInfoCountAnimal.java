@@ -10,18 +10,20 @@ import java.util.Map;
 public class TaskInfoCountAnimal implements Runnable {
     @Override
     public void run() {
-        Map<Class<? extends Organism>, Integer> countAnimal = new HashMap<>();
+        Map<String, Integer> countAnimal = new HashMap<>();
 
-
-        for (Location location : Island.getInstance().getLocation()) {
-            for (Organism organism : location.animalLiveCount.keySet()) {
-                countAnimal.merge(organism.getClass(), 1, Integer::sum);
+        Location[][] location = Island.getInstance().getLocation();
+        for (int x = 0; x < location.length; x++) {
+            for (int y = 0; y < location[x].length; y++) {
+                for (Organism organism : location[x][y].animalLiveCount.keySet()) {
+                    countAnimal.merge(organism.getClass().getSimpleName(), 1, Integer::sum);
+                }
             }
         }
-        for (Class<? extends Organism> aClass : countAnimal.keySet()) {
-            String upperCase = aClass.getSimpleName().toUpperCase();
-            OrganismType type = OrganismType.valueOf(upperCase);
-            System.out.printf("%s = %d ", type.getEmojiOrganism(), countAnimal.get(aClass));
+
+        for (String typeName : countAnimal.keySet()) {
+            OrganismType type = OrganismType.valueOf(typeName.toUpperCase());
+            System.out.printf("%s = %d ", type.getEmojiOrganism(), countAnimal.get(typeName));
         }
         System.out.println();
     }

@@ -16,6 +16,5 @@ public class TaskCreatePlant implements Runnable {
         for (int i = 0; i < countPlant; i++) {
            Fabric.createEatable(OrganismType.GRASS);
         }
-        System.out.printf("На острове выросла новая трава в количестве %d\n", countPlant);
     }
 }

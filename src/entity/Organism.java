@@ -18,6 +18,7 @@ public abstract class Organism {
          column = Random.getRandomCount(Settings.COLUMNS);
          line = Random.getRandomCount(Settings.LINES);
          location[column][line].animalLiveCount.put(this, 1);
+
     }
 
     public int getColumn() {
@@ -35,28 +36,7 @@ public abstract class Organism {
     public void setLine(int line) {
         this.line = line;
     }
-   public void move() {
-        try {
-            lock.tryLock();
-            Location oldLocation = location[getColumn()][getLine()];
-            int randomCount = Random.getRandomCount(4);
-            switch (randomCount){
-                case 0 -> setLine(getLine() + 1); // верх
-                case 1 -> setLine(getLine() - 1); // вниз
-                case 2 -> setColumn(getColumn() + 1); // вправо
-                case 3 -> setColumn(getColumn() - 1); // вправо
-            }
-            if (getColumn() < 0 || getColumn() >= Settings.COLUMNS
-                    || getLine() < 0 || getLine() >= Settings.LINES) {
-                System.out.println(this.getClass().getSimpleName() + " Ушел с этого острова!");
-            } else {
-                location[getColumn()][getLine()].animalLiveCount.put(this, 1);
-                System.out.println(this.getClass().getSimpleName() + " еще тут");
-            }
-            oldLocation.animalLiveCount.remove(this);
-        } finally {
-            lock.unlock();
-        }
-    }
+
+
 
 }

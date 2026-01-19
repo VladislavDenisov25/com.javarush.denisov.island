@@ -1,6 +1,7 @@
 package services;
 
 import entity.OrganismType;
+import entity.predator.Wolf;
 import repository.Fabric;
 import util.Random;
 import util.Settings;
@@ -12,11 +13,12 @@ public class Game {
     public void start() {
 
         createOrganizm();
+        Wolf wolf = new Wolf();
+        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(10);
+        ScheduledThreadPoolExecutor executor1 = new ScheduledThreadPoolExecutor(1);
+  //      executor.scheduleAtFixedRate(new TaskInfoCountAnimal(), 0, 10, TimeUnit.SECONDS);
+  //      executor.scheduleAtFixedRate(new TaskCreatePlant(), 5, 1, TimeUnit.SECONDS);
 
-        ScheduledThreadPoolExecutor executorInfoCountAnimal = new ScheduledThreadPoolExecutor(1);
-        executorInfoCountAnimal.scheduleAtFixedRate(new TaskInfoCountAnimal(), 0, 10, TimeUnit.SECONDS);
-        ScheduledThreadPoolExecutor executorCreatePlant = new ScheduledThreadPoolExecutor(1);
-        executorCreatePlant.scheduleAtFixedRate(new TaskCreatePlant(), 5, 1, TimeUnit.SECONDS);
 
     }
 

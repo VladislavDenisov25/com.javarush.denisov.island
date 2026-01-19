@@ -4,4 +4,5 @@ import entity.Animal;
 
 public class Wolf extends Animal {
 
+
 }

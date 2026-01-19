@@ -1,8 +1,8 @@
 package entity;
 
-import entity.island.Island;
 import entity.island.Location;
 import util.Random;
+import util.Settings;
 
 public abstract class Animal extends Organism {
 
@@ -10,17 +10,12 @@ public abstract class Animal extends Organism {
     void eat(Organism e) {
     }
 
-    void move(Location l) {
 
 
-        }
 
-
-    void multiply() {
-        
+    void multiply(Organism organism) {
+        organism = null;
     }
 
-    void die() {
 
-    }
 }

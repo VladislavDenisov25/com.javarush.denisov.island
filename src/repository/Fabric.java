@@ -7,11 +7,8 @@ import entity.predator.*;
 
 
 public class Fabric {
-
-
-
    public static void createEatable(OrganismType type){
-     switch (OrganismType.valueOf(String.valueOf(type))){
+     switch (OrganismType.valueOf(String.valueOf(type))) {
          case BOAR -> new Boar();
          case BUFFALO -> new Buffalo();
          case CATERPILLAR -> new Caterpillar();
@@ -28,8 +25,6 @@ public class Fabric {
          case FOX -> new Fox();
          case WOLF -> new Wolf();
          case GRASS -> new Grass();
-     };
-
-
+     }
    }
 }

@@ -13,7 +13,7 @@ public abstract class Organism {
     private int line;
 
     public Location[][] location = Island.getInstance().getLocation();
-    ReentrantLock lock = new ReentrantLock();
+
     public Organism() {
          column = Random.getRandomCount(Settings.COLUMNS);
          line = Random.getRandomCount(Settings.LINES);

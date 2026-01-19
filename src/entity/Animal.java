@@ -9,7 +9,7 @@ import java.util.Map;
 public abstract class Animal extends Organism {
 
 
-   public void eat() {
+   public void eat() {   // реализация сырая , не совсем четко проработа выборка поедания
         Location loc = location[getColumn()][getLine()];
         Map<Organism, Integer> animalLiveCount = loc.animalLiveCount;
 
@@ -31,7 +31,7 @@ public abstract class Animal extends Organism {
             }
         }
         if (organismAttack != null && Random.getRandomCount(100) <= verAttack){
-            animalLiveCount.remove(organismAttack);
+            animalLiveCount.remove(organismAttack); // изменение лучше делать в классе локатион
         }
 
     }
@@ -39,8 +39,17 @@ public abstract class Animal extends Organism {
 
 
 
-    void multiply(Organism organism) {
-        organism = null;
+    void multiply() {
+        Location loc = location[getColumn()][getLine()];
+        Map<Organism, Integer> animalLiveCount = loc.animalLiveCount;
+
+        for (Organism organism : animalLiveCount.keySet()) {
+            if ( organism.getClass() == this.getClass()) {
+               animalLiveCount.put(this, 1);
+               return;// добавление лучше делать в классе локатион
+            }
+        }
+
     }
 
     public void move() {

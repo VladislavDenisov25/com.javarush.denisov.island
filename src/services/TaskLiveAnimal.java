@@ -5,32 +5,32 @@ import entity.Organism;
 import entity.island.Island;
 import entity.island.Location;
 
+import java.util.concurrent.locks.ReentrantLock;
 
 
 public class TaskLiveAnimal implements Runnable {
 
-    Location[][] locations = Island.getInstance().getLocation();
+    ReentrantLock lock = new ReentrantLock();
+    public Location locations;
+
+    public TaskLiveAnimal(int x, int y) {
+        this.locations = Island.getInstance().getLocation()[x][y];
+    }
+
     @Override
     public void run() {
-            for (int x = 0; x < locations.length; x++) {
-                for (int y = 0; y < locations[x].length; y++) {
-                    // new runnable новый поток - жизнь одной клетки или складывать их в очередь и передать очередь
-
-                    int finalX = x;
-                    int finalY = y;
-                    new Runnable(){
-                        @Override
-                        public void run() {
-                            for (Organism organism : locations[finalX][finalY].animalLiveCount.keySet()) {
-                                if (organism instanceof Animal){
-                                    ((Animal) organism).move();
-                                }
-                            }
-                        }
-                    };
-
+        try {
+            lock.tryLock();
+            for (Organism organism : locations.animalLiveCount.keySet()) {
+                if (organism instanceof Animal) {
+                    ((Animal) organism).eat();
+                    ((Animal) organism).multiply();
+                    ((Animal) organism).move();
                 }
             }
-
+        } finally {
+            lock.unlock();
+        }
     }
 }
+

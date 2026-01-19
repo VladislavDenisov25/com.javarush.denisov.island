@@ -13,12 +13,12 @@ public class Game {
     public void start() {
 
         createOrganizm();
-        Wolf wolf = new Wolf();
-        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(10);
-        ScheduledThreadPoolExecutor executor1 = new ScheduledThreadPoolExecutor(1);
-  //      executor.scheduleAtFixedRate(new TaskInfoCountAnimal(), 0, 10, TimeUnit.SECONDS);
-  //      executor.scheduleAtFixedRate(new TaskCreatePlant(), 5, 1, TimeUnit.SECONDS);
 
+        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
+        ScheduledThreadPoolExecutor executor1 = new ScheduledThreadPoolExecutor(1);
+        executor.scheduleAtFixedRate(new TaskInfoCountAnimal(), 0, 10, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(new TaskCreatePlant(), 5, 1, TimeUnit.SECONDS);
+        executor1.scheduleWithFixedDelay(new TaskLiveAnimal(), 0, 1, TimeUnit.MILLISECONDS);
 
     }
 

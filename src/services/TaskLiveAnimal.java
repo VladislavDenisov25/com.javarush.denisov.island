@@ -5,9 +5,10 @@ import entity.Organism;
 import entity.island.Island;
 import entity.island.Location;
 
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class TaskMoveAnimal implements Runnable {
+public class TaskLiveAnimal implements Runnable {
     Location[][] locations = Island.getInstance().getLocation();
     ReentrantLock rent = new ReentrantLock();
     @Override

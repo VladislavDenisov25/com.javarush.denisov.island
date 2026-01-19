@@ -48,7 +48,7 @@ public abstract class Organism {
             }
             if (getColumn() < 0 || getColumn() >= Settings.COLUMNS
                     || getLine() < 0 || getLine() >= Settings.LINES) {
-                System.out.println(this.getClass().getSimpleName() + " Ушел с этого гнустного острова!");
+                System.out.println(this.getClass().getSimpleName() + " Ушел с этого острова!");
             } else {
                 location[getColumn()][getLine()].animalLiveCount.put(this, 1);
                 System.out.println(this.getClass().getSimpleName() + " еще тут");

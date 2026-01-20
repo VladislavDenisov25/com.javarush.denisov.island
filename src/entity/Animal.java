@@ -1,6 +1,7 @@
 package entity;
 
 import entity.island.Location;
+import repository.Fabric;
 import util.Random;
 import util.Settings;
 
@@ -38,20 +39,10 @@ public abstract class Animal extends Organism {
     }
 
     public void multiply() {
-        try {
-            lock.lock();
             Location loc = location[getColumn()][getLine()];
-            Map<Organism, Integer> animalLiveCount = loc.animalLiveCount;
-
-            for (Organism organism : animalLiveCount.keySet()) {
-                if (organism.getClass() == this.getClass()) {
-                    animalLiveCount.put(this, 1);
-                    return;// добавление лучше делать в классе локатион
-                }
-            }
-        } finally {
-            lock.unlock();
-        }
+           if (loc.getCountType(this) >= 2){
+               Fabric.createEatable(this.getType());
+           }
     }
 
     public void move() {

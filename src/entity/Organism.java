@@ -36,7 +36,7 @@ public abstract class Organism {
     public void setLine(int line) {
         this.line = line;
     }
-
+    public abstract OrganismType getType();
 
 
 }

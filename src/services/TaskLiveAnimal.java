@@ -20,7 +20,7 @@ public class TaskLiveAnimal implements Runnable {
     @Override
     public void run() {
         try {
-            lock.tryLock();
+            lock.lock();
             for (Organism organism : locations.animalLiveCount.keySet()) {
                 if (organism instanceof Animal) {
                     ((Animal) organism).eat();

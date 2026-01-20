@@ -8,11 +8,11 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
 public abstract class Animal extends Organism {
-ReentrantLock lock = new ReentrantLock();
+    ReentrantLock lock = new ReentrantLock();
 
     public void eat() {   // реализация сырая , не совсем четко проработа выборка поедания
         try {
-            lock.tryLock();
+            lock.lock();
             Location loc = location[getColumn()][getLine()];
             Map<Organism, Integer> animalLiveCount = loc.animalLiveCount;
 
@@ -39,7 +39,7 @@ ReentrantLock lock = new ReentrantLock();
 
     public void multiply() {
         try {
-            lock.tryLock();
+            lock.lock();
             Location loc = location[getColumn()][getLine()];
             Map<Organism, Integer> animalLiveCount = loc.animalLiveCount;
 
@@ -55,24 +55,38 @@ ReentrantLock lock = new ReentrantLock();
     }
 
     public void move() {
-        try {
-            lock.tryLock();
-            Location oldLocation = location[getColumn()][getLine()];
+        OrganismType organismType = getType();
+        int oldColum = getColumn();
+        int oldLine = getLine();
+
+        int maxCountMove = Random.getRandomCount(organismType.getMaxMove());
+        for (int i = 0; i < maxCountMove; i++) {
             int randomCount = Random.getRandomCount(4);
+            int colum = getColumn();
+            int line = getLine();
             switch (randomCount) {
-                case 0 -> setLine(getLine() + 1); // верх
-                case 1 -> setLine(getLine() - 1); // вниз
-                case 2 -> setColumn(getColumn() + 1); // вправо
-                case 3 -> setColumn(getColumn() - 1); // влево
+                case 0 -> setLine(line + 1);
+                case 1 -> setLine(line - 1);
+                case 2 -> setColumn(colum + 1);
+                case 3 -> setColumn(colum - 1);
             }
-            if (getColumn() < 0 || getColumn() >= Settings.COLUMNS
-                    || getLine() < 0 || getLine() >= Settings.LINES) {
-            } else {
-                location[getColumn()][getLine()].animalLiveCount.put(this, 1);
+            if (!isAnimalCanMove()) {
+                setColumn(colum);
+                setLine(line);
             }
-            oldLocation.animalLiveCount.remove(this);
-        } finally {
-            lock.unlock();
+        }
+        if ((getColumn() != oldColum) ||
+                (getLine() != oldLine)) {
+            location[getColumn()][getLine()].putAnimalLiveCount(this);
+            location[oldColum][oldLine].removeAnimalLiveCount(this);
+
         }
     }
+
+    public boolean isAnimalCanMove() {
+        OrganismType organismType = getType();
+        return (getColumn() >= 0 && getColumn() < Settings.COLUMNS && getLine() >= 0 && getLine() < Settings.LINES
+                && location[getColumn()][getLine()].getCountType(this) < organismType.getMaxCountCell());
+    }
+
 }

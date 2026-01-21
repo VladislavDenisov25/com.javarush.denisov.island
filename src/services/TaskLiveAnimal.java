@@ -13,24 +13,20 @@ import java.util.concurrent.locks.ReentrantLock;
 public class TaskLiveAnimal implements Runnable {
 
     public Organism organism;
-    Location[][] locations = Island.getInstance().getLocation();
+   Location location;
 
-    public TaskLiveAnimal(Organism organism) {
+    public TaskLiveAnimal(Organism organism, Location location) {
         this.organism = organism;
+        this.location = location;
     }
 
     @Override
     public void run() {
-        try {
-           locations[organism.getColumn()][organism.getLine()].getLock().lock();
-           if (organism != null && organism instanceof Animal) {
-               ((Animal) organism).eat();
-               ((Animal) organism).multiply();
-               ((Animal) organism).move();
-           }
-        } finally {
-            locations[organism.getColumn()][organism.getLine()].getLock().unlock();
-        }
+            if (organism != null && organism instanceof Animal) {
+                ((Animal) organism).eat();
+                ((Animal) organism).multiply();
+                ((Animal) organism).move();
+            }
     }
 }
 

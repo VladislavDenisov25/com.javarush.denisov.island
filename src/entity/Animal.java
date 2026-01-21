@@ -14,7 +14,7 @@ public abstract class Animal extends Organism {
     public void eat() {
         Location loc = this.location[getColumn()][getLine()];
         loc.getLock().lock();
-        System.out.printf("Заблокирована локация: %d %d в методе eat\n", this.getColumn(), this.getLine());
+
         try {
             Map<Organism, Integer> animalLiveCount = loc.animalLiveCount;
             OrganismType type = this.getType();
@@ -37,25 +37,27 @@ public abstract class Animal extends Organism {
 
             if (organismAttack != null && Random.getRandomCount(100) <= maxChance) {
                 loc.removeAnimalLiveCount(organismAttack);
+   //           System.out.printf("%s сьедает %s\n", this.getType().getEmojiOrganism(), organismAttack.getType().getEmojiOrganism());
             }
 
         } finally {
             loc.getLock().unlock();
-            System.out.printf("Разблокирована локация: %d %d в методе eat\n", this.getColumn(), this.getLine());
+
         }
     }
 
     public void multiply() {
         Location loc = location[getColumn()][getLine()];
         loc.getLock().lock();
-        System.out.printf("Заблокирована локация: %d %d в методе multiply\n", this.getColumn(), this.getLine());
+
         try {
             if (loc.getCountType(this) >= 2) {
                 Fabric.createEatable(this.getType());
+//                System.out.printf("рождение %s \n", this.getType().getEmojiOrganism());
             }
         } finally {
             loc.getLock().unlock();
-            System.out.printf("Разблокирована локация: %d %d в методе multiply\n", this.getColumn(), this.getLine());
+
         }
     }
 
@@ -96,35 +98,25 @@ public abstract class Animal extends Organism {
         }
 
         Location oldLoc = location[oldColumn][oldLine];
-        System.out.printf("локация: %d %d в методе move\n", oldColumn, oldLine);
         Location newLoc = location[newColumn][newLine];
-        System.out.printf("локация: %d %d в методе move\n", newColumn, newLine);
 
-        // Фиксированный порядок lock'ов — защита от deadlock
         Location first = oldLoc.hashCode() < newLoc.hashCode() ? oldLoc : newLoc;
-        if (first == oldLoc){
-            System.out.printf("у first координаты %d %d\n метод move", oldColumn, oldLine);
-            System.out.printf("у second координаты %d %d\n метод move", newColumn, newLine);
-        } else {
-            System.out.printf("у second координаты %d %d\n метод move", oldColumn, oldLine);
-            System.out.printf("у first координаты %d %d\n метод move", newColumn, newLine);
-        }
         Location second = first == oldLoc ? newLoc : oldLoc;
 
         first.getLock().lock();
         second.getLock().lock();
-        System.out.println("потоки метода move заблокированы");
+
         try {
             setColumn(newColumn);
             setLine(newLine);
 
             oldLoc.removeAnimalLiveCount(this);
             newLoc.putAnimalLiveCount(this);
-
+//           System.out.printf("%s ушел с локации %d %d в локацию %d %d\n", this.getType().getEmojiOrganism(), oldColumn, oldLine, newColumn, newLine);
         } finally {
             second.getLock().unlock();
             first.getLock().unlock();
-            System.out.println("потоки метода move разблокированы");
+
         }
     }
 
@@ -136,20 +128,10 @@ public abstract class Animal extends Organism {
 
         Location loc = location[column][line];
         loc.getLock().lock();
-        System.out.printf("локация: %d %d в методе isAnimal заблокирована\n", column, line);
         try {
             return loc.getCountType(this) < getType().getMaxCountCell();
         } finally {
             loc.getLock().unlock();
-            System.out.printf("локация: %d %d в методе isAnimal разблокирована\n", column, line);
         }
     }
-//    public boolean isAnimalCanMove() {
-//        OrganismType organismType = getType();
-//        return (getColumn() >= 0 && getColumn() < Settings.COLUMNS
-//                && getLine() >= 0 && getLine() < Settings.LINES
-//                && location[getColumn()][getLine()].getCountType(this)
-//                < organismType.getMaxCountCell());
-//    }
-
 }

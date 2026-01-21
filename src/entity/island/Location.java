@@ -3,11 +3,13 @@ package entity.island;
 import entity.Organism;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Location {
-    // тут лежат обьекты имя класса + хеш-код
+
     public Map<Organism, Integer> animalLiveCount = new HashMap<>();
-//?
+    ReentrantLock lock = new ReentrantLock(true);
+
     public int getCountType(Organism organism){// сколько таких типов на локации
       int countType = 0;
         for (Organism org : animalLiveCount.keySet()) {
@@ -23,5 +25,9 @@ public class Location {
     }
     public void removeAnimalLiveCount(Organism organism){
         animalLiveCount.remove(organism);
+    }
+
+    public ReentrantLock getLock() {
+        return lock;
     }
 }

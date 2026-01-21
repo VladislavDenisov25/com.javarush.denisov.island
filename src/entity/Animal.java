@@ -5,79 +5,151 @@ import repository.Fabric;
 import util.Random;
 import util.Settings;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
 public abstract class Animal extends Organism {
-    ReentrantLock lock = new ReentrantLock();
 
-    public void eat() {   // реализация сырая , не совсем четко проработа выборка поедания
+    public void eat() {
+        Location loc = this.location[getColumn()][getLine()];
+        loc.getLock().lock();
+        System.out.printf("Заблокирована локация: %d %d в методе eat\n", this.getColumn(), this.getLine());
         try {
-            lock.lock();
-            Location loc = location[getColumn()][getLine()];
             Map<Organism, Integer> animalLiveCount = loc.animalLiveCount;
-
-            OrganismType type = OrganismType.valueOf(this.getClass().getSimpleName().toUpperCase());
+            OrganismType type = this.getType();
             Map<Class, Integer> attackAnimal = type.getAttackAnimal();
 
             Organism organismAttack = null;
-            int verAttack = 0;
+            int maxChance = 0;
 
-            for (Organism organism : animalLiveCount.keySet()) {
-                Class<? extends Organism> organismClass = organism.getClass();
-                if (attackAnimal.containsKey(organismClass) && attackAnimal.get(organismClass) > verAttack) {
+            for (Organism organism : new ArrayList<>(animalLiveCount.keySet())) {
+                if (organism.getClass() == this.getClass()) {
+                    continue;
+                }
+
+                Integer chance = attackAnimal.get(organism.getClass());
+                if (chance != null && chance > maxChance) {
+                    maxChance = chance;
                     organismAttack = organism;
-                    verAttack = attackAnimal.get(organismClass);
                 }
             }
-            if (organismAttack != null && Random.getRandomCount(100) <= verAttack) {
-                animalLiveCount.remove(organismAttack); // изменение лучше делать в классе локатион
+
+            if (organismAttack != null && Random.getRandomCount(100) <= maxChance) {
+                loc.removeAnimalLiveCount(organismAttack);
             }
+
         } finally {
-            lock.unlock();
+            loc.getLock().unlock();
+            System.out.printf("Разблокирована локация: %d %d в методе eat\n", this.getColumn(), this.getLine());
         }
     }
 
     public void multiply() {
-            Location loc = location[getColumn()][getLine()];
-           if (loc.getCountType(this) >= 2){
-               Fabric.createEatable(this.getType());
-           }
+        Location loc = location[getColumn()][getLine()];
+        loc.getLock().lock();
+        System.out.printf("Заблокирована локация: %d %d в методе multiply\n", this.getColumn(), this.getLine());
+        try {
+            if (loc.getCountType(this) >= 2) {
+                Fabric.createEatable(this.getType());
+            }
+        } finally {
+            loc.getLock().unlock();
+            System.out.printf("Разблокирована локация: %d %d в методе multiply\n", this.getColumn(), this.getLine());
+        }
     }
 
     public void move() {
-        OrganismType organismType = getType();
-        int oldColum = getColumn();
+        if (getType().getMaxMove() == 0) {
+            return;
+        }
+
+        int oldColumn = getColumn();
         int oldLine = getLine();
 
-        int maxCountMove = Random.getRandomCount(organismType.getMaxMove());
-        for (int i = 0; i < maxCountMove; i++) {
-            int randomCount = Random.getRandomCount(4);
-            int colum = getColumn();
-            int line = getLine();
-            switch (randomCount) {
-                case 0 -> setLine(line + 1);
-                case 1 -> setLine(line - 1);
-                case 2 -> setColumn(colum + 1);
-                case 3 -> setColumn(colum - 1);
+        int newColumn = oldColumn;
+        int newLine = oldLine;
+
+        int maxSteps = Random.getRandomCount(getType().getMaxMove());
+
+        for (int i = 0; i < maxSteps; i++) {
+            int dir = Random.getRandomCount(4);
+
+            int tempCol = newColumn;
+            int tempLine = newLine;
+
+            switch (dir) {
+                case 0 -> tempLine++;
+                case 1 -> tempLine--;
+                case 2 -> tempCol++;
+                case 3 -> tempCol--;
             }
-            if (!isAnimalCanMove()) {
-                setColumn(colum);
-                setLine(line);
+
+            if (isAnimalCanMove(tempCol, tempLine)) {
+                newColumn = tempCol;
+                newLine = tempLine;
             }
         }
-        if ((getColumn() != oldColum) ||
-                (getLine() != oldLine)) {
-            location[getColumn()][getLine()].putAnimalLiveCount(this);
-            location[oldColum][oldLine].removeAnimalLiveCount(this);
 
+        if (oldColumn == newColumn && oldLine == newLine) {
+            return;
+        }
+
+        Location oldLoc = location[oldColumn][oldLine];
+        System.out.printf("локация: %d %d в методе move\n", oldColumn, oldLine);
+        Location newLoc = location[newColumn][newLine];
+        System.out.printf("локация: %d %d в методе move\n", newColumn, newLine);
+
+        // Фиксированный порядок lock'ов — защита от deadlock
+        Location first = oldLoc.hashCode() < newLoc.hashCode() ? oldLoc : newLoc;
+        if (first == oldLoc){
+            System.out.printf("у first координаты %d %d\n метод move", oldColumn, oldLine);
+            System.out.printf("у second координаты %d %d\n метод move", newColumn, newLine);
+        } else {
+            System.out.printf("у second координаты %d %d\n метод move", oldColumn, oldLine);
+            System.out.printf("у first координаты %d %d\n метод move", newColumn, newLine);
+        }
+        Location second = first == oldLoc ? newLoc : oldLoc;
+
+        first.getLock().lock();
+        second.getLock().lock();
+        System.out.println("потоки метода move заблокированы");
+        try {
+            setColumn(newColumn);
+            setLine(newLine);
+
+            oldLoc.removeAnimalLiveCount(this);
+            newLoc.putAnimalLiveCount(this);
+
+        } finally {
+            second.getLock().unlock();
+            first.getLock().unlock();
+            System.out.println("потоки метода move разблокированы");
         }
     }
 
-    public boolean isAnimalCanMove() {
-        OrganismType organismType = getType();
-        return (getColumn() >= 0 && getColumn() < Settings.COLUMNS && getLine() >= 0 && getLine() < Settings.LINES
-                && location[getColumn()][getLine()].getCountType(this) < organismType.getMaxCountCell());
+    public boolean isAnimalCanMove(int column, int line) {
+        if (column < 0 || column >= Settings.COLUMNS
+                || line < 0 || line >= Settings.LINES) {
+            return false;
+        }
+
+        Location loc = location[column][line];
+        loc.getLock().lock();
+        System.out.printf("локация: %d %d в методе isAnimal заблокирована\n", column, line);
+        try {
+            return loc.getCountType(this) < getType().getMaxCountCell();
+        } finally {
+            loc.getLock().unlock();
+            System.out.printf("локация: %d %d в методе isAnimal разблокирована\n", column, line);
+        }
     }
+//    public boolean isAnimalCanMove() {
+//        OrganismType organismType = getType();
+//        return (getColumn() >= 0 && getColumn() < Settings.COLUMNS
+//                && getLine() >= 0 && getLine() < Settings.LINES
+//                && location[getColumn()][getLine()].getCountType(this)
+//                < organismType.getMaxCountCell());
+//    }
 
 }

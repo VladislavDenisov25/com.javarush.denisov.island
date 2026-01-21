@@ -9,11 +9,9 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class TaskInfoCountAnimal implements Runnable {
-    ReentrantLock lock = new ReentrantLock();
     @Override
     public void run() {
-        try {
-            lock.tryLock();
+
             Map<String, Integer> countAnimal = new HashMap<>();
 
             Location[][] location = Island.getInstance().getLocation();
@@ -30,8 +28,5 @@ public class TaskInfoCountAnimal implements Runnable {
                 System.out.printf("%s = %d ", type.getEmojiOrganism(), countAnimal.get(typeName));
             }
             System.out.println();
-        } finally {
-            lock.unlock();
-        }
     }
 }

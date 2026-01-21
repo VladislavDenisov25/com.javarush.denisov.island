@@ -5,31 +5,31 @@ import entity.Organism;
 import entity.island.Island;
 import entity.island.Location;
 
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
 
 
 public class TaskLiveAnimal implements Runnable {
 
-    ReentrantLock lock = new ReentrantLock();
-    public Location locations;
+    public Organism organism;
+    Location[][] locations = Island.getInstance().getLocation();
 
-    public TaskLiveAnimal(int x, int y) {
-        this.locations = Island.getInstance().getLocation()[x][y];
+    public TaskLiveAnimal(Organism organism) {
+        this.organism = organism;
     }
 
     @Override
     public void run() {
         try {
-            lock.lock();
-            for (Organism organism : locations.animalLiveCount.keySet()) {
-                if (organism instanceof Animal) {
-                    ((Animal) organism).eat();
-                    ((Animal) organism).multiply();
-                    ((Animal) organism).move();
-                }
-            }
+           locations[organism.getColumn()][organism.getLine()].getLock().lock();
+           if (organism != null && organism instanceof Animal) {
+               ((Animal) organism).eat();
+               ((Animal) organism).multiply();
+               ((Animal) organism).move();
+           }
         } finally {
-            lock.unlock();
+            locations[organism.getColumn()][organism.getLine()].getLock().unlock();
         }
     }
 }

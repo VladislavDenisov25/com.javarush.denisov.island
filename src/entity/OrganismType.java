@@ -1,6 +1,7 @@
 package entity;
 
 import entity.herbivore.*;
+import entity.plant.Grass;
 import entity.predator.*;
 
 import java.util.HashMap;
@@ -11,36 +12,36 @@ public enum OrganismType {
     BOAR(400d, 2, 50, new HashMap<>() {{
         put(Module.class, 50);
         put(Caterpillar.class, 90);
-        put(Plant.class, 100);
+        put(Grass.class, 100);
     }}, "\uD83D\uDC17"),
     BUFFALO(700d, 3, 10, new HashMap<>() {{
-        put(Plant.class, 100);
+        put(Grass.class, 100);
     }}, "\uD83D\uDC03"),
     CATERPILLAR(0.01d, 0, 1000, new HashMap<>() {{
-        put(Plant.class, 100);
+        put(Grass.class, 100);
     }}, "\uD83D\uDC1B"),
     DEER(300d, 4, 20, new HashMap<>() {{
-        put(Plant.class, 100);
+        put(Grass.class, 100);
     }}, "\uD83E\uDD8C"),
     DUCK(1d, 4, 200, new HashMap<>() {{
         put(Caterpillar.class, 90);
-        put(Plant.class, 100);
+        put(Grass.class, 100);
     }}, "\uD83E\uDD86"),
     GOAT(60d, 3, 140, new HashMap<>() {{
-        put(Plant.class, 100);
+        put(Grass.class, 100);
     }}, "\uD83D\uDC10"),
     HORSE(400d, 4, 20, new HashMap<>() {{
-        put(Plant.class, 100);
+        put(Grass.class, 100);
     }}, "\uD83D\uDC0E"),
     MOUSE(0.05d, 1, 500, new HashMap<>() {{
         put(Caterpillar.class, 90);
-        put(Plant.class, 100);
+        put(Grass.class, 100);
     }}, "\uD83D\uDC01"),
     RABBIT(2d, 2, 150, new HashMap<>() {{
-        put(Plant.class, 100);
+        put(Grass.class, 100);
     }}, "\uD83D\uDC07"),
     SHEEP(70d, 3, 140, new HashMap<>() {{
-        put(Plant.class, 100);
+        put(Grass.class, 100);
     }}, "\uD83D\uDC11"),
     BEAR(500d, 2, 5, new HashMap<>() {{
         put(Boa.class, 80);

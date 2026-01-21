@@ -5,8 +5,9 @@ import repository.Fabric;
 import util.Settings;
 import util.Random;
 
-public class TaskCreatePlant implements Runnable {
+import java.util.concurrent.atomic.AtomicInteger;
 
+public class TaskCreatePlant implements Runnable {
     @Override
     public void run() {
 
@@ -14,6 +15,7 @@ public class TaskCreatePlant implements Runnable {
         for (int i = 0; i < countPlant; i++) {
            Fabric.createEatable(OrganismType.GRASS);
         }
-        System.out.println("Выросло " + countPlant + OrganismType.GRASS.getEmojiOrganism());
+
+       // System.out.println("Выросло " + countPlant + OrganismType.GRASS.getEmojiOrganism());
     }
 }

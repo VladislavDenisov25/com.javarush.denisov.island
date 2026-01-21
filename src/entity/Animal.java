@@ -30,12 +30,13 @@ public abstract class Animal extends Organism {
                 if (chance != null && chance > maxChance) {
                     maxChance = chance;
                     organismAttack = organism;
+                    break;
                 }
             }
 
-            if (organismAttack != null && Random.getRandomCount(100) <= maxChance) {
+            if (organismAttack != null && Random.getRandomCount(101) <= maxChance) {
                 loc.removeAnimalLiveCount(organismAttack);
-                //           System.out.printf("%s сьедает %s\n", this.getType().getEmojiOrganism(), organismAttack.getType().getEmojiOrganism());
+                           System.out.printf("%s сьедает %s\n", this.getType().getEmojiOrganism(), organismAttack.getType().getEmojiOrganism());
             }
 
         } finally {

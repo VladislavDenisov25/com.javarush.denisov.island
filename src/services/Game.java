@@ -18,19 +18,23 @@ public class Game {
     ScheduledExecutorService executorService = Executors.newScheduledThreadPool(3);
 
     public void start() {
-        executorService.scheduleAtFixedRate(new TaskCreatePlant(), 1, 1, TimeUnit.SECONDS);
+        executorService.scheduleAtFixedRate(new TaskCreatePlant(), 1, 10, TimeUnit.SECONDS);
         createOrganizm();
 
         executorService.schedule(new TaskInfoCountAnimal(), 0, TimeUnit.SECONDS);
 
 
-        ScheduledFuture<?> organismTask =
-                executorService.scheduleAtFixedRate(new OrganismWorker(island), 1, 1, TimeUnit.SECONDS);
 
-        executorService.schedule(() -> {
-            organismTask.cancel(true);
-            executorService.schedule(new TaskInfoCountAnimal(), 0, TimeUnit.MILLISECONDS);
-        }, 5, TimeUnit.SECONDS);
+            ScheduledFuture<?> organismTask =
+                    executorService.scheduleAtFixedRate(new OrganismWorker(island), 1, 1, TimeUnit.SECONDS);
+
+            executorService.schedule(() -> {
+                organismTask.cancel(true);
+            }, 10, TimeUnit.SECONDS);
+            ScheduledFuture<?> organismTask2 =
+                    executorService.scheduleAtFixedRate(new OrganismWorker(island), 1, 1, TimeUnit.SECONDS);
+
+
     }
 
     public void createOrganizm() {

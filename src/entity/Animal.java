@@ -1,6 +1,7 @@
 package entity;
 
 import entity.island.Location;
+import entity.predator.Bear;
 import repository.Fabric;
 import util.Random;
 import util.Settings;
@@ -37,6 +38,11 @@ public abstract class Animal extends Organism {
 
             if (organismAttack != null && Random.getRandomCount(101) <= maxChance) {
                 loc.removeAnimalLiveCount(organismAttack);
+
+                if (organismAttack.getType() == OrganismType.BEAR){
+                    System.out.printf("%s этот смельчак убил %s\n", this.getType().getEmojiOrganism(), OrganismType.BEAR.getEmojiOrganism());
+                }
+
                 this.setHunger(this.getHunger() - organismAttack.getType().getWeight());
                 if (this.getHunger() < 0.0d) {
                     this.setHunger(0.0d);
@@ -57,7 +63,7 @@ public abstract class Animal extends Organism {
             if (loc.getCountType(this) >= 2 && (this.getHunger() == 0.0d)) {
                 Fabric.createEatable(this.getType());
                 this.setHunger(0.0d);
-                System.out.printf("рождение %s \n", this.getType().getEmojiOrganism());
+ //               System.out.printf("рождение %s \n", this.getType().getEmojiOrganism());
             }
         } finally {
             loc.getLock().unlock();

@@ -1,11 +1,5 @@
 package util;
 
-import entity.Organism;
-import entity.OrganismType;
-import entity.island.Location;
-import repository.Fabric;
-
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Random {
@@ -18,4 +12,3 @@ public class Random {
         return ThreadLocalRandom.current().nextInt(minCount, maxCount);
     }
 }
-

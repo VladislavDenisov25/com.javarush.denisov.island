@@ -14,7 +14,7 @@ public abstract class Organism {
 
     public Location[][] location = Island.getInstance().getLocation();
 
-    public Organism() {
+    public Organism() { // создавать если есть место
          column = Random.getRandomCount(Settings.COLUMNS);
          line = Random.getRandomCount(Settings.LINES);
          location[column][line].animalLiveCount.put(this, 1);

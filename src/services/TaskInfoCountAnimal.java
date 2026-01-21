@@ -9,12 +9,13 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class TaskInfoCountAnimal implements Runnable {
+
     @Override
     public void run() {
 
             Map<String, Integer> countAnimal = new HashMap<>();
-
             Location[][] location = Island.getInstance().getLocation();
+
             for (int x = 0; x < location.length; x++) {
                 for (int y = 0; y < location[x].length; y++) {
                     for (Organism organism : location[x][y].animalLiveCount.keySet()) {
@@ -22,7 +23,6 @@ public class TaskInfoCountAnimal implements Runnable {
                     }
                 }
             }
-
             for (String typeName : countAnimal.keySet()) {
                 OrganismType type = OrganismType.valueOf(typeName.toUpperCase());
                 System.out.printf("%s = %d ", type.getEmojiOrganism(), countAnimal.get(typeName));

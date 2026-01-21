@@ -2,13 +2,7 @@ package services;
 
 import entity.Animal;
 import entity.Organism;
-import entity.island.Island;
 import entity.island.Location;
-
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.locks.ReentrantLock;
-
 
 public class TaskLiveAnimal implements Runnable {
 

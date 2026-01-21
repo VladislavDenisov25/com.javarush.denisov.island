@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class Game {
 
     Island island = Island.getInstance();
-    ScheduledExecutorService executorService = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
+    ScheduledExecutorService executorService = Executors.newScheduledThreadPool(3);
 
     public void start() {
 
@@ -29,6 +29,7 @@ public class Game {
         executorService.schedule(() -> {
             organismTask.cancel(true);
             executorService.schedule(new TaskInfoCountAnimal(), 0, TimeUnit.MILLISECONDS);
+            executorService.shutdownNow();
         }, 5, TimeUnit.SECONDS);
     }
 

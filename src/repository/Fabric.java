@@ -5,7 +5,6 @@ import entity.herbivore.*;
 import entity.plant.Grass;
 import entity.predator.*;
 
-
 public class Fabric {
    public static void createEatable(OrganismType type){
      switch (OrganismType.valueOf(String.valueOf(type))) {

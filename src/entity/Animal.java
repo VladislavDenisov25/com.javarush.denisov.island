@@ -4,14 +4,12 @@ import entity.island.Location;
 import repository.Fabric;
 import util.Random;
 import util.Settings;
-
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.concurrent.locks.ReentrantLock;
 
 public abstract class Animal extends Organism {
 
-    public void eat() {
+    public void eat() { // не едят траву и вымирает вид  вымирает вид
         Location loc = this.location[getColumn()][getLine()];
         loc.getLock().lock();
 
@@ -37,7 +35,7 @@ public abstract class Animal extends Organism {
 
             if (organismAttack != null && Random.getRandomCount(100) <= maxChance) {
                 loc.removeAnimalLiveCount(organismAttack);
-   //           System.out.printf("%s сьедает %s\n", this.getType().getEmojiOrganism(), organismAttack.getType().getEmojiOrganism());
+                //           System.out.printf("%s сьедает %s\n", this.getType().getEmojiOrganism(), organismAttack.getType().getEmojiOrganism());
             }
 
         } finally {
@@ -46,7 +44,7 @@ public abstract class Animal extends Organism {
         }
     }
 
-    public void multiply() {
+    public void multiply() { // только при полном желудке
         Location loc = location[getColumn()][getLine()];
         loc.getLock().lock();
 

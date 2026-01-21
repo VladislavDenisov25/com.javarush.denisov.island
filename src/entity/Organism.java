@@ -5,19 +5,19 @@ import entity.island.Location;
 import util.Random;
 import util.Settings;
 
-import java.util.concurrent.locks.ReentrantLock;
-
 public abstract class Organism {
 
     private int column;
     private int line;
+    private double hunger;
 
     public Location[][] location = Island.getInstance().getLocation();
 
-    public Organism() { // создавать если есть место
+    public Organism() {
         while (true) {
             column = Random.getRandomCount(Settings.COLUMNS);
             line = Random.getRandomCount(Settings.LINES);
+            hunger = this.getType().getWeight() * 1/4;
             if (location[column][line].getCountType(this) < this.getType().getMaxCountCell()) {
                 location[column][line].animalLiveCount.put(this, 1);
                 return;
@@ -41,6 +41,15 @@ public abstract class Organism {
     public void setLine(int line) {
         this.line = line;
     }
+
+    public double getHunger() {
+        return hunger;
+    }
+
+    public void setHunger(double hunger) {
+        this.hunger = hunger;
+    }
+
     public abstract OrganismType getType();
 
 

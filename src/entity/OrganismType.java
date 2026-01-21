@@ -99,11 +99,11 @@ public enum OrganismType {
     }
 
     public double getWeight() {
-        return weight;  // для проверки сытости
+        return weight;
     }
 
     public int getMaxMove() {
-        return maxMove; // для хождения
+        return maxMove;
     }
 
     public int getMaxCountCell() {
@@ -111,7 +111,7 @@ public enum OrganismType {
     }
 
     public Map<Class, Integer> getAttackAnimal() {
-        return attackAnimal;   // для атаки
+        return attackAnimal;
     }
 
     public String getEmojiOrganism() {

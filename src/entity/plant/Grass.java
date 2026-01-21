@@ -8,4 +8,6 @@ public class Grass extends Plant {
     public OrganismType getType() {
         return OrganismType.GRASS;
     }
+
+
 }

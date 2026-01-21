@@ -4,12 +4,13 @@ import entity.island.Location;
 import repository.Fabric;
 import util.Random;
 import util.Settings;
+
 import java.util.ArrayList;
 import java.util.Map;
 
 public abstract class Animal extends Organism {
 
-    public void eat() { // не едят траву и вымирает вид  вымирает вид
+    public void eat() {
         Location loc = this.location[getColumn()][getLine()];
         loc.getLock().lock();
 
@@ -36,7 +37,10 @@ public abstract class Animal extends Organism {
 
             if (organismAttack != null && Random.getRandomCount(101) <= maxChance) {
                 loc.removeAnimalLiveCount(organismAttack);
-                           System.out.printf("%s сьедает %s\n", this.getType().getEmojiOrganism(), organismAttack.getType().getEmojiOrganism());
+                this.setHunger(this.getHunger() - organismAttack.getType().getWeight());
+                if (this.getHunger() < 0.0d) {
+                    this.setHunger(0.0d);
+                }
             }
 
         } finally {
@@ -45,14 +49,15 @@ public abstract class Animal extends Organism {
         }
     }
 
-    public void multiply() { // только при полном желудке
+    public void multiply() {
         Location loc = location[getColumn()][getLine()];
         loc.getLock().lock();
 
         try {
-            if (loc.getCountType(this) >= 2) {
+            if (loc.getCountType(this) >= 2 && (this.getHunger() == 0.0d)) {
                 Fabric.createEatable(this.getType());
-//                System.out.printf("рождение %s \n", this.getType().getEmojiOrganism());
+                this.setHunger(0.0d);
+                System.out.printf("рождение %s \n", this.getType().getEmojiOrganism());
             }
         } finally {
             loc.getLock().unlock();
@@ -71,7 +76,7 @@ public abstract class Animal extends Organism {
         int newColumn = oldColumn;
         int newLine = oldLine;
 
-        int maxSteps = Random.getRandomCount(getType().getMaxMove());
+        int maxSteps = Random.getRandomCount(getType().getMaxMove() + 1);
 
         for (int i = 0; i < maxSteps; i++) {
             int dir = Random.getRandomCount(4);
@@ -111,7 +116,6 @@ public abstract class Animal extends Organism {
 
             oldLoc.removeAnimalLiveCount(this);
             newLoc.putAnimalLiveCount(this);
-//           System.out.printf("%s ушел с локации %d %d в локацию %d %d\n", this.getType().getEmojiOrganism(), oldColumn, oldLine, newColumn, newLine);
         } finally {
             second.getLock().unlock();
             first.getLock().unlock();

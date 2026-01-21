@@ -2,6 +2,7 @@ package services;
 
 import entity.OrganismType;
 import entity.island.Island;
+import entity.predator.Wolf;
 import repository.Fabric;
 import util.Random;
 import util.Settings;
@@ -30,7 +31,6 @@ public class Game {
             organismTask.cancel(true);
             executorService.schedule(new TaskInfoCountAnimal(), 0, TimeUnit.MILLISECONDS);
         }, 5, TimeUnit.SECONDS);
-
     }
 
     public void createOrganizm() {

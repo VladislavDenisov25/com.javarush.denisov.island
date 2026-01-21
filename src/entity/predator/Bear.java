@@ -8,4 +8,5 @@ public class Bear extends Animal {
     public OrganismType getType() {
         return OrganismType.BEAR;
     }
+
 }

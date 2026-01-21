@@ -10,7 +10,7 @@ public class Location {
     public Map<Organism, Integer> animalLiveCount = new HashMap<>();
     ReentrantLock lock = new ReentrantLock(true);
 
-    public int getCountType(Organism organism){// сколько таких типов на локации
+    public int getCountType(Organism organism){
       int countType = 0;
         for (Organism org : animalLiveCount.keySet()) {
             if (org.getClass() == organism.getClass()){

@@ -7,7 +7,7 @@ import entity.island.Location;
 public class TaskLiveAnimal implements Runnable {
 
     public Organism organism;
-   Location location;
+    Location location;
 
     public TaskLiveAnimal(Organism organism, Location location) {
         this.organism = organism;
@@ -16,11 +16,10 @@ public class TaskLiveAnimal implements Runnable {
 
     @Override
     public void run() {
-            if (organism != null && organism instanceof Animal) {
-                ((Animal) organism).eat();
-                ((Animal) organism).multiply();
-                ((Animal) organism).move();
-            }
+        if (organism != null && organism instanceof Animal) {
+            ((Animal) organism).eat();
+            ((Animal) organism).multiply();
+            ((Animal) organism).move();
+        }
     }
 }
-

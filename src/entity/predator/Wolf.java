@@ -8,5 +8,4 @@ public class Wolf extends Animal {
     public OrganismType getType() {
         return OrganismType.WOLF;
     }
-
 }

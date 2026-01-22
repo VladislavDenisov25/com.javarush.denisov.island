@@ -11,7 +11,6 @@ public abstract class Organism {
     private int line;
     private double hunger;
 
-
     public Location[][] location = Island.getInstance().getLocation();
 
     public Organism() {
@@ -24,7 +23,6 @@ public abstract class Organism {
                 return;
             }
         }
-
     }
 
     public int getColumn() {

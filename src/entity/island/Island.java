@@ -10,7 +10,7 @@ public class Island {
     private Island() {
         for (int x = 0; x < location.length; x++) {
             for (int y = 0; y < location[x].length; y++) {
-                if (location[x][y] == null){
+                if (location[x][y] == null) {
                     location[x][y] = new Location();
                 }
             }

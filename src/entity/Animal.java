@@ -17,7 +17,7 @@ public abstract class Animal extends Organism {
         try {
             Map<Organism, Integer> animalLiveCount = loc.animalLiveCount;
             OrganismType type = this.getType();
-            Map<Class, Integer> attackAnimal = type.getAttackAnimal();
+            Map<Class<? extends Organism>, Integer> attackAnimal = type.getAttackAnimal();
 
             Organism organismAttack = null;
             int maxChance = 0;
@@ -38,7 +38,7 @@ public abstract class Animal extends Organism {
             if (organismAttack != null && Random.getRandomCount(101) <= maxChance) {
                 loc.removeAnimalLiveCount(organismAttack);
 
-                this.setHunger(this.getHunger() - organismAttack.getHunger());
+                this.setHunger(this.getHunger() - organismAttack.getType().getWeight());
                 if (this.getHunger() < 0d) {
                     this.setHunger(0d);
                 }

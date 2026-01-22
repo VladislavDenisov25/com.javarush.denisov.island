@@ -27,7 +27,6 @@ public class OrganismWorker implements Runnable {
                 if (Thread.currentThread().isInterrupted()) {
                     return;
                 }
-
                 process(location);
             }
         }
@@ -40,7 +39,7 @@ public class OrganismWorker implements Runnable {
         }
 
         Set<Organism> organisms = location.animalLiveCount.keySet();
-        if (organisms == null || organisms.isEmpty()) {
+        if (organisms.isEmpty()) {
             return;
         }
 
@@ -65,7 +64,6 @@ public class OrganismWorker implements Runnable {
             if (Thread.currentThread().isInterrupted()) {
                 return;
             }
-
             taskLiveAnimal.run();
         }
     }

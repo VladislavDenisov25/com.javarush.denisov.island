@@ -11,13 +11,14 @@ public abstract class Organism {
     private int line;
     private double hunger;
 
+
     public Location[][] location = Island.getInstance().getLocation();
 
     public Organism() {
         while (true) {
             column = Random.getRandomCount(Settings.COLUMNS);
             line = Random.getRandomCount(Settings.LINES);
-            hunger = this.getType().getWeight() * 1/4;
+            hunger = this.getType().getPrimaryHunger();
             if (location[column][line].getCountType(this) < this.getType().getMaxCountCell()) {
                 location[column][line].animalLiveCount.put(this, 1);
                 return;
@@ -42,6 +43,8 @@ public abstract class Organism {
         this.line = line;
     }
 
+    public abstract OrganismType getType();
+
     public double getHunger() {
         return hunger;
     }
@@ -49,9 +52,4 @@ public abstract class Organism {
     public void setHunger(double hunger) {
         this.hunger = hunger;
     }
-
-    public abstract OrganismType getType();
-
-
-
 }

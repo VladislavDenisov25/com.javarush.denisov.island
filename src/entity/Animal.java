@@ -1,5 +1,6 @@
 package entity;
 
+import constants.Constants;
 import entity.island.Location;
 import repository.Fabric;
 import util.Random;
@@ -8,7 +9,7 @@ import util.Settings;
 import java.util.ArrayList;
 import java.util.Map;
 
-public abstract class Animal extends Organism {
+public abstract class Animal extends Organism implements Constants{
 
     public void eat() {
         Location loc = this.location[getColumn()][getLine()];
@@ -35,12 +36,12 @@ public abstract class Animal extends Organism {
                 }
             }
 
-            if (organismAttack != null && Random.getRandomCount(101) <= maxChance) {
+            if (organismAttack != null && Random.getRandomCount(MAX_PROBABILITY) <= maxChance) {
                 loc.removeAnimalLiveCount(organismAttack);
 
                 this.setHunger(this.getHunger() - organismAttack.getType().getWeight());
-                if (this.getHunger() < 0d) {
-                    this.setHunger(0d);
+                if (this.getHunger() < LACK_OF_HUNGER) {
+                    this.setHunger(LACK_OF_HUNGER);
                 }
             }
 
@@ -55,7 +56,8 @@ public abstract class Animal extends Organism {
         loc.getLock().lock();
 
         try {
-            if (loc.getCountType(this) >= 2 && (this.getHunger() == 0d)) {
+            if (loc.getCountType(this) >= Settings.NUMBER_TO_MULTIPLY
+                    && (this.getHunger() == LACK_OF_HUNGER)) {
                 Fabric.createEatable(this.getType());
                 this.setHunger(this.getType().getPrimaryHunger());
             }

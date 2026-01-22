@@ -19,7 +19,7 @@ public abstract class Organism {
             line = Random.getRandomCount(Settings.LINES);
             hunger = this.getType().getPrimaryHunger();
             if (location[column][line].getCountType(this) < this.getType().getMaxCountCell()) {
-                location[column][line].animalLiveCount.put(this, 1);
+                location[column][line].animalLiveCount.put(this, Settings.MIN_CREATE_COUNT_EATABLE);
                 return;
             }
         }

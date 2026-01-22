@@ -1,5 +1,6 @@
 package services;
 
+import constants.Constants;
 import entity.Organism;
 import entity.OrganismType;
 import entity.island.Island;
@@ -8,7 +9,7 @@ import entity.island.Location;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TaskInfoCountAnimal implements Runnable {
+public class TaskInfoCountAnimal implements Runnable, Constants {
 
     @Override
     public void run() {
@@ -25,7 +26,7 @@ public class TaskInfoCountAnimal implements Runnable {
         }
         for (String typeName : countAnimal.keySet()) {
             OrganismType type = OrganismType.valueOf(typeName.toUpperCase());
-            System.out.printf("%s = %d ", type.getEmojiOrganism(), countAnimal.get(typeName));
+            System.out.printf(Constants.REGULAR_TASK_INFO, type.getEmojiOrganism(), countAnimal.get(typeName));
         }
         System.out.println();
     }

@@ -4,11 +4,12 @@ import entity.Organism;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Location {
 
-    public Map<Organism, Integer> animalLiveCount = new HashMap<>();
+    public Map<Organism, Integer> animalLiveCount = new ConcurrentHashMap<>();;
     ReentrantLock lock = new ReentrantLock(true);
 
     public int getCountType(Organism organism) {

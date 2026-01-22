@@ -33,7 +33,7 @@ public enum OrganismType {
     HORSE(400d, 60d, 4, 20, new HashMap<>() {{
         put(Grass.class, 100);
     }}, "\uD83D\uDC0E"),
-    MOUSE(0.05d, 0.01d, 1, 500, new HashMap<>() {{
+    MOUSE(0.05d, 0.1d, 1, 500, new HashMap<>() {{
         put(Caterpillar.class, 90);
         put(Grass.class, 100);
     }}, "\uD83D\uDC01"),

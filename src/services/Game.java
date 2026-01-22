@@ -14,20 +14,20 @@ import java.util.concurrent.TimeUnit;
 public class Game {
 
     Island island = Island.getInstance();
-    ScheduledExecutorService executorService = Executors.newScheduledThreadPool(Settings.MAX_CORE_POOL_SIZE);
+    ScheduledExecutorService threadPool = Executors.newScheduledThreadPool(Settings.MAX_CORE_POOL_SIZE);
 
     public void start() {
         createOrganizm();
 
-        executorService.scheduleAtFixedRate(new TaskCreatePlant(), Settings.INITIAL_DELAY, Settings.PERIOD_CREATE_PLANT, TimeUnit.SECONDS);
-        executorService.scheduleAtFixedRate(new TaskInfoCountAnimal(), Settings.INITIAL_DELAY, Settings.PERIOD_INFO_COUNT_ANIMAL, TimeUnit.SECONDS);
+        threadPool.scheduleAtFixedRate(new TaskCreatePlant(), Settings.INITIAL_DELAY, Settings.PERIOD_ONE_SECOND, TimeUnit.SECONDS);
+        threadPool.scheduleAtFixedRate(new TaskInfoCountAnimal(), Settings.INITIAL_DELAY, Settings.PERIOD_LIVE_ANIMAL, TimeUnit.SECONDS);
 
-        ScheduledFuture<?> organismTask = executorService.scheduleAtFixedRate(new OrganismWorker(island), Settings.INITIAL_DELAY, Settings.PERIOD_LIVE_ANIMAL, TimeUnit.SECONDS);
+        ScheduledFuture<?> organismTask = threadPool.scheduleAtFixedRate(new OrganismWorker(island), Settings.INITIAL_DELAY, Settings.PERIOD_ONE_SECOND, TimeUnit.SECONDS);
 
-        executorService.schedule(() -> {
+        threadPool.schedule(() -> {
             organismTask.cancel(true);
-            executorService.shutdown();
-        }, Settings.PERIOD_DELAY, TimeUnit.SECONDS);
+            threadPool.shutdown();
+        }, Settings.PERIOD_LIVE_ANIMAL, TimeUnit.SECONDS);
     }
 
     public void createOrganizm() {
